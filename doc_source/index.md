@@ -40,6 +40,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Sending and Receiving Events Between AWS Accounts](CloudWatchEvents-CrossAccountEventDelivery.md)
 + [Adding Events with PutEvents](AddEventsPutEvents.md)
    + [Calculating PutEvents Event Entry Sizes](CalculatePutEventsEntrySize.md)
++ [Using CloudWatch Events with Interface VPC Endpoints](cloudwatch-events-and-interface-VPC.md)
 + [Authentication and Access Control for Amazon CloudWatch Events](auth-and-access-control-cwe.md)
    + [Overview of Managing Access Permissions to Your CloudWatch Events Resources](iam-access-control-identity-based-cwe.md)
    + [Using Identity-Based Policies (IAM Policies) for CloudWatch Events](iam-identity-based-access-control-cwe.md)

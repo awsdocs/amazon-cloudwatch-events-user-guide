@@ -21,11 +21,11 @@ Create a rule that takes snapshots on a schedule\. You can use a rate expression
 
    1. Choose **Fixed rate of** and specify the schedule interval \(for example, 5 minutes\)\. Alternatively, choose **Cron expression** and specify a cron expression \(for example, every 15 minutes Monday through Friday, starting at the current time\)\.
 
-1. For **Targets**, choose **Add target** and then select **EC2 Create Snapshot API call**\.
+1. For **Targets**, choose **Add target** and then select **EC2 CreateSnapshot API call**\.
 
 1. For **Volume ID**, type the volume ID of the targeted Amazon EBS volume\.
 
-1. For **AWS permissions**, choose the option to create a new role\. The new role grants the built\-in target permissions to access resources on your behalf\.
+1. Choose **Create a new role for this specific resource**\. The new role grants the target permissions to access resources on your behalf\.
 
 1. Choose **Configure details**\.
 

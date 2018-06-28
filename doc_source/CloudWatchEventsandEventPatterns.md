@@ -9,16 +9,15 @@ Events in Amazon CloudWatch Events are represented as JSON objects\. For more in
   "detail-type": "EC2 Instance State-change Notification",
   "source": "aws.ec2",
   "account": "111122223333",
-  "time": "2015-12-22T18:43:48Z",
-  "region": "us-east-1",
+  "time": "2017-12-22T18:43:48Z",
+  "region": "us-west-1",
   "resources": [
-    "arn:aws:ec2:us-east-1:123456789012:instance/i-12345678"
+    "arn:aws:ec2:us-west-1:123456789012:instance/ i-1234567890abcdef0"
   ],
   "detail": {
-    "instance-id": "i-12345678",
+    "instance-id": " i-1234567890abcdef0",
     "state": "terminated"
-  },
-  "StatusMessage": ""
+  }
 }
 ```
 
@@ -160,7 +159,7 @@ To match events where the value of `responseElements` is null, use the following
 }
 ```
 
-Null values and empty strings are not interchangeable in patttern matching\. A pattern that is written to detect empty strings will not catch values of `null`\.
+Null values and empty strings are not interchangeable in pattern matching\. A pattern that is written to detect empty strings will not catch values of `null`\.
 
 ## Arrays In CloudWatch Events Patterns<a name="ArraysInCloudWatchEventsPatterns"></a>
 

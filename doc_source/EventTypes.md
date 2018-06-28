@@ -2130,6 +2130,84 @@ The following is the format for AWS Glue events\.
 }
 ```
 
+**Job Run is in Starting State**
+
+```
+{
+   "version":"0",
+   "id":"66fbc5e1-aac3-5e85-63d0-856ec669a050",
+   "detail-type":"Glue Job Run Status",
+   "source":"aws.glue",
+   "account":"123456789012",
+   "time":"2018-04-24T20:57:34Z",
+   "region":"us-east-1",
+   "resources":[],
+   "detail":{
+      "jobName":"MyJob",
+      "severity":"INFO",
+      "notificationCondition":{
+         "NotifyDelayAfter":1.0
+      },
+      "state":"STARTING",
+          "jobRunId":"jr_6aa58e7a3aa44e2e4c7db2c50e2f7396cb57901729e4b702dcb2cfbbeb3f7a86",
+      "message":"Job is in STARTING state",
+      "startedOn":"2018-04-24T20:55:47.941Z"
+   }
+}
+```
+
+**Job Run is in Running State**
+
+```
+{
+   "version":"0",
+   "id":"66fbc5e1-aac3-5e85-63d0-856ec669a050",
+   "detail-type":"Glue Job Run Status",
+   "source":"aws.glue",
+   "account":"123456789012",
+   "time":"2018-04-24T20:57:34Z",
+   "region":"us-east-1",
+   "resources":[],
+   "detail":{
+      "jobName":"MyJob",
+      "severity":"INFO",
+      "notificationCondition":{
+         "NotifyDelayAfter":1.0
+      },
+      "state":"RUNNING",
+    "jobRunId":"jr_6aa58e7a3aa44e2e4c7db2c50e2f7396cb57901729e4b702dcb2cfbbeb3f7a86",
+      "message":"Job is in RUNNING state",
+      "startedOn":"2018-04-24T20:55:47.941Z"
+   }
+}
+```
+
+**Job Run is in Stopping State**
+
+```
+{
+   "version":"0",
+   "id":"66fbc5e1-aac3-5e85-63d0-856ec669a050",
+   "detail-type":"Glue Job Run Status",
+   "source":"aws.glue",
+   "account":"123456789012",
+   "time":"2018-04-24T20:57:34Z",
+   "region":"us-east-1",
+   "resources":[],
+   "detail":{
+      "jobName":"MyJob",
+      "severity":"INFO",
+      "notificationCondition":{
+         "NotifyDelayAfter":1.0
+      },
+      "state":"STOPPING",
+    "jobRunId":"jr_6aa58e7a3aa44e2e4c7db2c50e2f7396cb57901729e4b702dcb2cfbbeb3f7a86",
+      "message":"Job is in STOPPING state",
+      "startedOn":"2018-04-24T20:55:47.941Z"
+   }
+}
+```
+
 ## Amazon GuardDuty Events<a name="guardduty-event-types"></a>
 
 For information about example Amazon GuardDuty events, see [Monitoring Amazon GuardDuty with Amazon CloudWatch Events](http://docs.aws.amazon.com/guardduty/latest/ug//guardduty_findings_cloudwatch.html) in the *Amazon GuardDuty User Guide*\.
