@@ -2030,21 +2030,21 @@ The following is the format for AWS Glue events\.
 
 ```
 {
-"version":"0",
-"id":"abcdef00-1234-5678-9abc-def012345678",
-"detail-type":"Glue Job State Change",
-"source":"aws.glue",
-"account":"123456789012",
-"time":"2017-11-20T20:22:06Z",
-"region":"us-east-1",
-"resources":[],
-"detail":{
-"jobName":"MyJob",
-"severity":"INFO",
-"state":"STOPPED",
-"jobRunId":"jr_abc0123456789abcdef0123456789abcdef0123456789abcdef0123456789def",
-"message":"Job run stopped"
-}
+    "version":"0",
+    "id":"abcdef00-1234-5678-9abc-def012345678",
+    "detail-type":"Glue Job State Change",
+    "source":"aws.glue",
+    "account":"123456789012",
+    "time":"2017-11-20T20:22:06Z",
+    "region":"us-east-1",
+    "resources":[],
+    "detail":{
+        "jobName":"MyJob",
+        "severity":"INFO",
+        "state":"STOPPED",
+        "jobRunId":"jr_abc0123456789abcdef0123456789abcdef0123456789abcdef0123456789def",
+        "message":"Job run stopped"
+    }
 }
 ```
 
