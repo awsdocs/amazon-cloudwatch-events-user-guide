@@ -13,4 +13,5 @@ The following tutorials show you how to create CloudWatch Events rules for certa
 + [Tutorial: Schedule Lambda Functions](RunLambdaSchedule.md)
 + [Tutorial: Set Systems Manager Automation as a Target](SSM_Automation_as_Target.md)
 + [Tutorial: Relay Events to a Kinesis Stream](RelayEventsKinesisStream.md)
++ [Tutorial: Run an Amazon ECS Task When a File is Uploaded to an Amazon S3 Bucket](CloudWatch-Events-tutorial-ECS.md)
 + [Tutorial: Schedule Automated Builds Using AWS CodeBuild](CloudWatch-Events-tutorial-codebuild.md)

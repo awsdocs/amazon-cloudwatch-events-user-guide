@@ -34,15 +34,15 @@ Create a Lambda function to log data events for your S3 buckets\. You specify th
 
 1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you are new to Lambda, you see a welcome page; choose **Get Started Now**; otherwise, choose **Create a Lambda function**\.
+1. If you are new to Lambda, you see a welcome page\. Choose **Get Started Now**\. Otherwise, choose **Create a Lambda function**\.
 
-1. On the **Select blueprint** page, type `hello` for the filter, and then choose the **hello\-world** blueprint\.
+1. On the **Select blueprint** page, type `hello` for the filter and choose the **hello\-world** blueprint\.
 
 1. On the **Configure triggers** page, choose **Next**\.
 
 1. On the **Configure function** page, do the following:
 
-   1. Type a name and description for the Lambda function\. \(For example, name the function "LogS3DataEvents"\.\)
+   1. Type a name and description for the Lambda function\. For example, name the function "LogS3DataEvents"\.
 
    1. Edit the code for the Lambda function\. For example:
 
@@ -56,7 +56,7 @@ Create a Lambda function to log data events for your S3 buckets\. You specify th
       };
       ```
 
-   1. For **Role**, choose **Choose an existing role** and then choose your basic execution role from **Existing role**\. Otherwise, create a new basic execution role\.
+   1. For **Role**, choose **Choose an existing role**\. For **Existing role**, select your basic execution role\. Otherwise, create a new basic execution role\.
 
    1. Choose **Next**\.
 
@@ -78,14 +78,14 @@ Create a rule to run your Lambda function in response to an Amazon S3 data event
 
    1. Choose **Build event pattern to match events by service**\.
 
-   1. Choose **Simple Storage Service \(S3\)** and then choose **Object Level Operations**\.
+   1. Choose **Simple Storage Service \(S3\)**, **Object Level Operations**\.
 
-   1. Choose **Specific operation\(s\)** and then choose **PutObject**\.
+   1. Choose **Specific operation\(s\)**, **PutObject**\.
 
    1. By default, the rule matches data events for all buckets in the region\. To match data events for specific buckets, choose **Specify bucket\(s\) by name** and then specify one or more buckets\.  
 ![\[The Event selector pane\]](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/images/log_state_S3PutObject.PNG)
 
-1. For **Targets**, choose **Add target**, and then choose **Lambda function**\.
+1. For **Targets**, choose **Add target**, **Lambda function**\.
 
 1. For **Function**, select the Lambda function that you created\.
 

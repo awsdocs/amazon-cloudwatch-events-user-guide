@@ -1,6 +1,6 @@
 # Tutorial: Log AWS API Calls Using CloudWatch Events<a name="LogAPICall"></a>
 
-You can use a AWS Lambda function that logs each AWS API call\. For example, you can create a rule to log any operation within Amazon EC2, or you can limit this rule to log only a specific API call\. In this tutorial, you log every time an Amazon EC2 instance is stopped\.
+You can use an AWS Lambda function that logs each AWS API call\. For example, you can create a rule to log any operation within Amazon EC2, or you can limit this rule to log only a specific API call\. In this tutorial, you log every time an Amazon EC2 instance is stopped\.
 
 ## Prerequisite<a name="log-api-prerequisite"></a>
 
@@ -14,27 +14,27 @@ Before you can match these events, you must use AWS CloudTrail to set up a trail
 
 1. For **Trail name**, type a name for the trail\.
 
-1. For **S3 bucket**, type the name for the new bucket where CloudTrail will deliver logs\.
+1. For **S3 bucket**, type the name for the new bucket to which CloudTrail should deliver logs\.
 
 1. Choose **Create**\.
 
 ## Step 1: Create an AWS Lambda Function<a name="api-create-lambda-function"></a>
 
-Create a Lambda function to log the API call events\. You specify this function when you create your rule\.
+Create a Lambda function to log the API call events\. Specify this function when you create your rule\.
 
 **To create a Lambda function**
 
 1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you are new to Lambda, you see a welcome page; choose **Get Started Now**; otherwise, choose **Create a Lambda function**\.
+1. If you are new to Lambda, you see a welcome page\. Choose **Get Started Now**\. Otherwise, choose **Create a Lambda function**\.
 
-1. On the **Select blueprint** page, type `hello` for the filter, and then choose the **hello\-world** blueprint\.
+1. On the **Select blueprint** page, type `hello` for the filter and choose the **hello\-world** blueprint\.
 
 1. On the **Configure triggers** page, choose **Next**\.
 
 1. On the **Configure function** page, do the following:
 
-   1. Type a name and description for the Lambda function\. \(For example, name the function "LogEC2StopInstance"\.\)
+   1. Type a name and description for the Lambda function\. For example, name the function "LogEC2StopInstance"\.
 
    1. Edit the sample code for the Lambda function\. For example:
 
@@ -48,7 +48,7 @@ Create a Lambda function to log the API call events\. You specify this function 
       };
       ```
 
-   1. For **Role**, choose **Choose an existing role** and then choose your basic execution role from **Existing role**\. Otherwise, create a new basic execution role\.
+   1. For **Role**, choose **Choose an existing role**\. For **Existing role**, select your basic execution role\. Otherwise, create a new basic execution role\.
 
    1. Choose **Next**\.
 
@@ -64,19 +64,17 @@ Create a rule to run your Lambda function whenever you stop an Amazon EC2 instan
 
 1. In the navigation pane, choose **Events**, **Create rule**\.
 
-1. Choose \.
-
 1. For **Event source**, do the following:
 
    1. Choose **Event Pattern**\.
 
    1. Choose **Build event pattern to match events by service**\.
 
-   1. Choose **EC2** and then choose **AWS API Call via CloudTrail**\.
+   1. Choose **EC2**, **AWS API Call via CloudTrail**\.
 
    1. Choose **Specific operation\(s\)** and then type `StopInstances` in the box below\.
 
-1. For **Targets**, choose **Add target** and then choose **Lambda function**\.
+1. For **Targets**, choose **Add target**, **Lambda function**\.
 
 1. For **Function**, select the Lambda function that you created\.
 

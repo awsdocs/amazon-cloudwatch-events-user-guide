@@ -21,7 +21,7 @@ Create a rule that takes snapshots on a schedule\. You can use a rate expression
 
    1. Choose **Fixed rate of** and specify the schedule interval \(for example, 5 minutes\)\. Alternatively, choose **Cron expression** and specify a cron expression \(for example, every 15 minutes Monday through Friday, starting at the current time\)\.
 
-1. For **Targets**, choose **Add target** and then select **EC2 CreateSnapshot API call**\.
+1. For **Targets**, choose **Add target** and then select **EC2 CreateSnapshot API call**\. You may have to scroll up in the list of possible targets to find **EC2 CreateSnapshot API call**\.
 
 1. For **Volume ID**, type the volume ID of the targeted Amazon EBS volume\.
 
@@ -51,6 +51,6 @@ You can verify your rule by viewing your first snapshot after it is taken\.
 
    1. In the navigation pane, choose **Events**, **Rules**\.
 
-   1. Select the rule and then choose **Actions**, **Disable**\.
+   1. Select the rule and choose **Actions**, **Disable**\.
 
    1. When prompted for confirmation, choose **Disable**\.

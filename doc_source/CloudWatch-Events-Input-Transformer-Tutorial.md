@@ -2,11 +2,11 @@
 
 You can use the input transformer feature of CloudWatch Events to customize the text that is taken from an event before it is input to the target of a rule\. 
 
-You can define multiple JSON paths from the event and assign their outputs to different variables\. Then you can use those variables in the input template in the form of <*variable\-name*>\.
+You can define multiple JSON paths from the event and assign their outputs to different variables\. Then you can use those variables in the input template as <*variable\-name*>\.
 
 If you specify a variable to match a JSON path that does not exist in the event, the variable is replaced with null\. The characters < and > cannot be escaped\.
 
-In this tutorial, we extract the instance\-id and state of an Amazon EC2 instance from the instance state change event\. We use input transformer to put that data into an easy\-to\-read message that is sent to an Amazon SNS topic\. The rule is triggered when any instance changes to any state\. For example, with this rule, the following Amazon EC2 instance state\-change notification event produces the Amazon SNS message **The EC2 instance i\-1234567890abcdef0 has changed state to stopped\.**
+In this tutorial, we extract the instance\-id and state of an Amazon EC2 instance from the instance state change event\. We use the input transformer to put that data into an easy\-to\-read message that is sent to an Amazon SNS topic\. The rule is triggered when any instance changes to any state\. For example, with this rule, the following Amazon EC2 instance state\-change notification event produces the Amazon SNS message **The EC2 instance i\-1234567890abcdef0 has changed state to stopped\.**
 
 ```
 {
@@ -30,7 +30,7 @@ We achieve this by mapping the *instance* variable to the `$.detail.instance-id`
 
 ## Create a Rule<a name="input-transformer-create-rule"></a>
 
-**To use input transformer to customize Amazon EC2 instance state change information that is sent to a target**
+**To customize instance state change information sent to a target using the input transformer**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
@@ -42,13 +42,13 @@ We achieve this by mapping the *instance* variable to the `$.detail.instance-id`
 
    1. Choose **Build event pattern to match events by service**\.
 
-   1. Choose **EC2** and then choose **EC2 Instance State\-change Notification**\.
+   1. Choose **EC2**, **EC2 Instance State\-change Notification**\.
 
-   1. Choose **Any state** and **Any instance**\.
+   1. Choose **Any state**, **Any instance**\.
 
-1. For **Targets**, choose **Add target** and then choose **SNS topic**\.
+1. For **Targets**, choose **Add target**, **SNS topic**\.
 
-1. For **Topic**, select the Amazon SNS topic that you want to be notified when Amazon EC2 instances change state\.
+1. For **Topic**, select the Amazon SNS topic for which to be notified when Amazon EC2 instances change state\.
 
 1. Choose **Configure input**, **Input Transformer**\.
 

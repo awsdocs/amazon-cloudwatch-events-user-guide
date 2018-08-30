@@ -4,7 +4,7 @@ The following AWS services emit events that can be detected by CloudWatch Events
 
 **Topics**
 + [Events for Services Not Listed](#events-for-services-not-listed)
-+ [Auto Scaling Events](#auto_scaling_event_types)
++ [Amazon EC2 Auto Scaling Events](#auto_scaling_event_types)
 + [AWS API Call Events](#api_event_type)
 + [AWS Batch Events](#batch_event_type)
 + [AWS CodeBuild Events](#codebuild_event_type)
@@ -35,13 +35,13 @@ The following AWS services emit events that can be detected by CloudWatch Events
 
 You can also use CloudWatch Events with services that do not emit events and are not on the preceding list\. AWS CloudTrail is a service that automatically records events such as AWS service API calls\. You can create CloudWatch Events rules that trigger on the information captured by CloudTrail\. For more information about CloudTrail, see [What is AWS CloudTrail?](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)\. For more information about creating a CloudWatch Events rule that uses CloudTrail, see [Creating a CloudWatch Events Rule That Triggers on an AWS API Call Using AWS CloudTrail](Create-CloudWatch-Events-CloudTrail-Rule.md)\.
 
-## Auto Scaling Events<a name="auto_scaling_event_types"></a>
+## Amazon EC2 Auto Scaling Events<a name="auto_scaling_event_types"></a>
 
-The following are examples of the events for Auto Scaling\. For more information, see [Getting CloudWatch Events When Your Auto Scaling Group Scales](http://docs.aws.amazon.com/autoscaling/ec2/userguide/cloud-watch-events.html) in the *Amazon EC2 Auto Scaling User Guide*\.
+The following are examples of the events for Amazon EC2 Auto Scaling\. For more information, see [Getting CloudWatch Events When Your Auto Scaling Group Scales](http://docs.aws.amazon.com/autoscaling/ec2/userguide/cloud-watch-events.html) in the *Amazon EC2 Auto Scaling User Guide*\.
 
 **EC2 Instance\-launch Lifecycle Action**
 
-Auto Scaling moved an instance to a `Pending:Wait` state due to a lifecycle hook\.
+Amazon EC2 Auto Scaling moved an instance to a `Pending:Wait` state due to a lifecycle hook\.
 
 ```
 {
@@ -68,7 +68,7 @@ Auto Scaling moved an instance to a `Pending:Wait` state due to a lifecycle hook
 
 **EC2 Instance Launch Successful**
 
-Auto Scaling successfully launched an instance\.
+Amazon EC2 Auto Scaling successfully launched an instance\.
 
 ```
 {
@@ -153,7 +153,8 @@ Auto Scaling moved an instance to a `Terminating:Wait` state due to a lifecycle 
     "AutoScalingGroupName": "sampleASG",
     "LifecycleHookName": "SampleLifecycleHook-6789",
     "EC2InstanceId": "i-12345678",
-    "LifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING"
+    "LifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
+    "NotificationMetadata": "additional-info
   }
 }
 ```
@@ -1390,7 +1391,9 @@ For Amazon ECS sample events, see [Amazon ECS Events](http://docs.aws.amazon.com
 
 ## Amazon EMR Events<a name="emr_event_type"></a>
 
-The following are examples of events for Amazon EMR\.
+Events reported by Amazon EMR have `aws.emr` as the value for `Source`, while Amazon EMR API events reported via CloudTrail have `aws.elasticmapreduce` as the value for `Source`\.
+
+The following are examples of events reported by Amazon EMR\.
 
 **Amazon EMR Auto Scaling Policy State Change**
 
@@ -2030,20 +2033,20 @@ The following is the format for AWS Glue events\.
 
 ```
 {
-    "version":"0",
-    "id":"abcdef00-1234-5678-9abc-def012345678",
-    "detail-type":"Glue Job State Change",
-    "source":"aws.glue",
-    "account":"123456789012",
-    "time":"2017-11-20T20:22:06Z",
-    "region":"us-east-1",
-    "resources":[],
-    "detail":{
-        "jobName":"MyJob",
-        "severity":"INFO",
-        "state":"STOPPED",
-        "jobRunId":"jr_abc0123456789abcdef0123456789abcdef0123456789abcdef0123456789def",
-        "message":"Job run stopped"
+   "version":"0",
+   "id":"abcdef00-1234-5678-9abc-def012345678",
+   "detail-type":"Glue Job State Change",
+   "source":"aws.glue",
+   "account":"123456789012",
+   "time":"2017-11-20T20:22:06Z",
+   "region":"us-east-1",
+   "resources":[],
+   "detail":{
+       "jobName":"MyJob",
+       "severity":"INFO",
+       "state":"STOPPED",
+       "jobRunId":"jr_abc0123456789abcdef0123456789abcdef0123456789abcdef0123456789def",
+       "message":"Job run stopped"
     }
 }
 ```

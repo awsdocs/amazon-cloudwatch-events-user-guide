@@ -21,7 +21,7 @@ You can use Amazon CloudWatch Events to invoke AWS Systems Manager Run Command a
 
 1. For **Targets**, choose **Add Target**, **SSM Run Command\.** 
 
-1. For **Document**, choose **AWS\-RunShellScript \(Linux\)**\. \(Note that there are many other **Document** options which cover both Linux and Windows instances\.\) For **Target key**, type **tag:environment**\. For **Target value\(s\)**, type **production** and choose **Add**\.
+1. For **Document**, choose **AWS\-RunShellScript \(Linux\)**\. There are many other **Document** options that cover both Linux and Windows instances\. For **Target key**, type **tag:environment**\. For **Target value\(s\)**, type **production** and choose **Add**\.
 
 1. Under **Configure parameter\(s\)**, choose **Constant**\.
 
@@ -30,7 +30,7 @@ You can use Amazon CloudWatch Events to invoke AWS Systems Manager Run Command a
 1. If necessary, type the appropriate information in **WorkingDirectory** and **ExecutionTimeout**\.
 
 1. CloudWatch Events can create the IAM role needed for your event to run: 
-   + To create an IAM role automatically, choose **Create a new role for this specific resource\.**
+   + To create an IAM role automatically, choose **Create a new role for this specific resource**\.
    + To use an IAM role that you created before, choose **Use existing role**\.  
 ![\[The Target selector pane\]](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/images/cwe_tutorial_runcmd2.PNG)
 

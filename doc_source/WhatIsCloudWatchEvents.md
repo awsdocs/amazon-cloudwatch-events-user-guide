@@ -10,8 +10,8 @@ You can configure the following AWS services as targets for CloudWatch Events:
 + Streams in Amazon Kinesis Data Streams
 + Delivery streams in Amazon Kinesis Data Firehose
 + Amazon ECS tasks
-+ SSM Run Command
-+ SSM Automation
++ Systems Manager Run Command
++ Systems Manager Automation
 + AWS Batch jobs
 + Step Functions state machines
 + Pipelines in AWS CodePipeline
@@ -19,7 +19,7 @@ You can configure the following AWS services as targets for CloudWatch Events:
 + Amazon Inspector assessment templates
 + Amazon SNS topics
 + Amazon SQS queues
-+ Built\-in targets
++ Built\-in targets—`EC2 CreateSnapshot API call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`, and `EC2 TerminateInstances API call`\.
 + The default event bus of another AWS account
 
 ## Concepts<a name="CloudWatchEventsComponents"></a>
@@ -32,7 +32,7 @@ Before you begin using CloudWatch Events, you should understand the following co
 ## Related AWS Services<a name="related_services_cwe"></a>
 
 The following services are used in conjunction with CloudWatch Events:
-+ **AWS CloudTrail** enables you to monitor the calls made to the CloudWatch Events API for your account, including calls made by the AWS Management Console, the AWS CLI and other services\. When CloudTrail logging is turned on, CloudWatch Events writes log files to an S3 bucket\. Each log file contains one or more records, depending on how many actions are performed to satisfy a request\. For more information, see [Logging Amazon CloudWatch Events API Calls in AWS CloudTrail](logging_cw_api_calls_cwe.md)\.
++ **AWS CloudTrail** enables you to monitor the calls made to the CloudWatch Events API for your account, including calls made by the AWS Management Console, the AWS CLI and other services\. When CloudTrail logging is turned on, CloudWatch Events writes log files to an S3 bucket\. Each log file contains one or more records, depending on how many actions are performed to satisfy a request\. For more information, see [Logging Amazon CloudWatch Events API Calls with AWS CloudTrail](logging_cw_api_calls_cwe.md)\.
 + **AWS CloudFormation** enables you to model and set up your AWS resources\. You create a template that describes the AWS resources you want, and AWS CloudFormation takes care of provisioning and configuring those resources for you\. You can use CloudWatch Events rules in your AWS CloudFormation templates\. For more information, see [AWS::Events::Rule](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html) in the AWS CloudFormation User Guide\.
 + **AWS Config** enables you to record configuration changes to your AWS resources\. This includes how resources relate to one another and how they were configured in the past, so that you can see how the configurations and relationships change over time\. You can also create AWS Config rules to check whether your resources are compliant or noncompliant with your organization's policies\. For more information, see the [AWS Config Developer Guide](http://docs.aws.amazon.com/config/latest/developerguide/)\.
 + **AWS Identity and Access Management \(IAM\)** helps you securely control access to AWS resources for your users\. Use IAM to control who can use your AWS resources \(authentication\), what resources they can use, and how they can use them \(authorization\)\. For more information, see [Authentication and Access Control for Amazon CloudWatch Events](auth-and-access-control-cwe.md)\.

@@ -36,11 +36,11 @@ As an example, create a rule to send events to your stream when you stop an Amaz
 
    1. Choose **Build event pattern to match events by service**\.
 
-   1. Choose **EC2** and then choose **Instance State\-change Notification**\.
+   1. Choose **EC2**, **Instance State\-change Notification**\.
 
-   1. Choose **Specific state\(s\)** and then choose **Running**\.
+   1. Choose **Specific state\(s\)**, **Running**\.
 
-1. For **Targets**, choose **Add target**, and then choose **Kinesis stream**\.
+1. For **Targets**, choose **Add target**, **Kinesis stream**\.
 
 1. For **Stream**, select the stream that you created\.
 
@@ -94,6 +94,6 @@ You can get the record from the stream to verify that the event was relayed\.
    aws kinesis get-records --shard-iterator AAAAAAAAAAHSywljv0zEgPX4NyKdZ5wryMzP9yALs8NeKbUjp1IxtZs1Sp+KEd9I6AJ9ZG4lNR1EMi+9Md/nHvtLyxpfhEzYvkTZ4D9DQVz/mBYWRO6OTZRKnW9gd+efGN2aHFdkH1rJl4BL9Wyrk+ghYG22D2T1Da2EyNSH1+LAbK33gQweTJADBdyMwlo5r6PqcP2dzhg=
    ```
 
-   If the command is successful, it requests records from your stream for the specified shard\. You can receive zero or more records\. Any records returned might not represents all records in your stream\. If you don't receive the data you expect, keep calling `get-records`\.
+   If the command is successful, it requests records from your stream for the specified shard\. You can receive zero or more records\. Any records returned might not represent all records in your stream\. If you don't receive the data you expect, keep calling `get-records`\.
 
-   Records in Kinesis are Base64\-encoded\. However, the streams support in the AWS CLI does not provide Base64 decoding\. If you use a Base64 decoder to manually decode the data, you see that it is the event relayed to the stream in JSON form\.
+   Records in Kinesis are Base64\-encoded\. However, the streams support in the AWS CLI does not provide base64 decoding\. If you use a base64 decoder to manually decode the data, you see that it is the event relayed to the stream in JSON form\.

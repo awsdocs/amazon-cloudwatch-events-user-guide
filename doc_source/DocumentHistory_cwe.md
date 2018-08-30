@@ -1,5 +1,11 @@
 # Document History<a name="DocumentHistory_cwe"></a>
 
+The following table describes important changes in each release of the CloudWatch Events User Guide, beginning in June 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
+
+| Change | Description | Date | 
+| --- |--- |--- |
+| Support for Amazon VPC endpoints | You can now establish a private connection between your VPC and CloudWatch Events\. For more information, see [Using CloudWatch Events with Interface VPC Endpoints](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/cloudwatch-events-and-interface-VPC.html) in the *Amazon CloudWatch Events User Guide*\. | June 28, 2018 | 
+
 The following table describes the important changes to the *Amazon CloudWatch Events User Guide*\.
 
 
@@ -20,5 +26,5 @@ The following table describes the important changes to the *Amazon CloudWatch Ev
 |  AWS CodeDeploy events  |  Added support for events for AWS CodeDeploy\. For more information, see [AWS CodeDeploy Events](EventTypes.md#acd_event_types)\.  |  9 September 2016  | 
 |  Scheduled events with 1 minute granularity  |  Added support for scheduled events with 1 minute granularity\. For more information, see [Cron Expressions](ScheduledEvents.md#CronExpressions) and [Rate Expressions](ScheduledEvents.md#RateExpressions)\.  | 19 April 2016 | 
 |  Amazon Simple Queue Service queues as targets  |  Added support for Amazon SQS queues as targets\. For more information, see [What is Amazon CloudWatch Events?](WhatIsCloudWatchEvents.md)\.  | 30 March 2016 | 
-|  Auto Scaling events  |  Added support for events for Auto Scaling lifecycle hooks\. For more information, see [Auto Scaling Events](EventTypes.md#auto_scaling_event_types)\.  | 24 February 2016 | 
+|  Auto Scaling events  |  Added support for events for Auto Scaling lifecycle hooks\. For more information, see [Amazon EC2 Auto Scaling Events](EventTypes.md#auto_scaling_event_types)\.  | 24 February 2016 | 
 |  New service  |  Initial release of CloudWatch Events\.  | 14 January 2016 | 

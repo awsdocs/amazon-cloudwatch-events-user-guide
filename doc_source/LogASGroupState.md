@@ -2,25 +2,25 @@
 
 You can run an AWS Lambda function that logs an event whenever an Auto Scaling group launches or terminates an Amazon EC2 instance and whether the launch or terminate event was successful\.
 
-For additional CloudWatch Events scenarios using Auto Scaling events, see [Getting CloudWatch Events When Your Auto Scaling Group Scales](http://docs.aws.amazon.com/autoscaling/latest/userguide/cloud-watch-events.html) in the *Amazon EC2 Auto Scaling User Guide*\.
+For information about additional CloudWatch Events scenarios using Amazon EC2 Auto Scaling events, see [Getting CloudWatch Events When Your Auto Scaling Group Scales](http://docs.aws.amazon.com/autoscaling/latest/userguide/cloud-watch-events.html) in the *Amazon EC2 Auto Scaling User Guide*\.
 
 ## Step 1: Create an AWS Lambda Function<a name="as-create-lambda-function"></a>
 
-Create a Lambda function to log the scale out and scale in events for your Auto Scaling group\. You specify this function when you create your rule\.
+Create a Lambda function to log the scale\-out and scale\-in events for your Auto Scaling group\. Specify this function when you create your rule\.
 
 **To create a Lambda function**
 
 1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you are new to Lambda, you see a welcome page; choose **Get Started Now**; otherwise, choose **Create a Lambda function**\.
+1. If you are new to Lambda, you see a welcome page\. Choose **Get Started Now**\. Otherwise, choose **Create a Lambda function**\.
 
-1. On the **Select blueprint** page, type `hello` for the filter, and then choose the **hello\-world** blueprint\.
+1. On the **Select blueprint** page, type `hello` for the filter and choose the **hello\-world** blueprint\.
 
 1. On the **Configure triggers** page, choose **Next**\.
 
 1. On the **Configure function** page, do the following:
 
-   1. Type a name and description for the Lambda function\. \(For example, name the function "LogAutoScalingEvent"\.\)
+   1. Type a name and description for the Lambda function\. For example, name the function "LogAutoScalingEvent"\.
 
    1. Edit the sample code for the Lambda function\. For example:
 
@@ -34,7 +34,7 @@ Create a Lambda function to log the scale out and scale in events for your Auto 
       };
       ```
 
-   1. For **Role**, choose **Choose an existing role** and then choose your basic execution role from **Existing role**\. Otherwise, create a new basic execution role\.
+   1. For **Role**, choose **Choose an existing role**\. For **Existing role**, select your basic execution role\. Otherwise, create a new basic execution role\.
 
    1. Choose **Next**\.
 
@@ -56,26 +56,26 @@ Create a rule to run your Lambda function whenever your Auto Scaling group launc
 
    1. Choose **Build event pattern to match events by service**\.
 
-   1. Choose **Auto Scaling** and then choose **Instance Launch and Terminate**\.
+   1. Choose **Auto Scaling**, **Instance Launch and Terminate**\.
 
-   1. Choose **Any instance event** to capture all successful and unsuccessful instance launch and terminate events\.  
+   1. To capture all successful and unsuccessful instance launch and terminate events, choose **Any instance event**\.  
 ![\[The Event selector pane\]](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/images/log_stateautoscaling1.PNG)
 
-1. By default, the rule matches any Auto Scaling group in the region\. To make the rule match a specific Auto Scaling group, choose **Specific group name\(s\)** and then choose one or more Auto Scaling groups\.
+1. By default, the rule matches any Auto Scaling group in the Region\. To make the rule match a specific Auto Scaling group, choose **Specific group name\(s\)** and then select one or more Auto Scaling groups\.
 
-1. For **Targets**, choose **Add target** and then choose **Lambda function**\.
+1. For **Targets**, choose **Add target**, **Lambda function**\.
 
 1. For **Function**, select the Lambda function that you created\.
 
 1. Choose **Configure details**\.
 
-1. For **Rule definition**, type a name and description for the rule\. \(For example, describe the rule as "Log whenever an Auto Scaling group scales out or in"\.\)
+1. For **Rule definition**, type a name and description for the rule\. For example, describe the rule as "Log whenever an Auto Scaling group scales out or in"\.
 
 1. Choose **Create rule**\.
 
 ## Step 3: Test the Rule<a name="as-test-rule"></a>
 
-You can test your rule by manually scaling an Auto Scaling group so that it launches an instance\. After waiting a few minutes for the scale out event to occur, you can verify that your Lambda function was invoked\.
+You can test your rule by manually scaling an Auto Scaling group so that it launches an instance\. After waiting a few minutes for the scale\-out event to occur, verify that your Lambda function was invoked\.
 
 **To test your rule using an Auto Scaling group**
 
@@ -87,7 +87,7 @@ You can test your rule by manually scaling an Auto Scaling group so that it laun
 
    1. Select the check box for your Auto Scaling group\.
 
-   1. On the **Details** tab, choose **Edit**\. For **Desired**, increase the desired capacity by one\. For example, if the current value is 2, type 3\. The desired capacity must be less than or equal to the maximum size of the group\. Therefore, you must update **Max** if your new value for **Desired** is greater than **Max**\. When you are finished, choose **Save**\.
+   1. On the **Details** tab, choose **Edit**\. For **Desired**, increase the desired capacity by one\. For example, if the current value is 2, type 3\. The desired capacity must be less than or equal to the maximum size of the group\. If your new value for **Desired** is greater than **Max**, you must update **Max**\. When you are finished, choose **Save**\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 

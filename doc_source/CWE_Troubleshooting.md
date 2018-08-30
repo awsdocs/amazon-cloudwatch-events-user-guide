@@ -11,6 +11,7 @@ You can use the steps in this section to troubleshoot CloudWatch Events\.
 + [My rule is not working because the IAM role associated with the rule is ignored when the rule is triggered](#IAMRoleIgnored)
 + [I created a rule with an EventPattern that is supposed to match a resource, but I don't see any events that match the rule](#EventsDoNotMatchRule)
 + [My event's delivery to the target experienced a delay](#DelayedEventDelivery)
++ [Some events were never delivered to my target](#NeverDeliveredToTarget)
 + [My rule was triggered more than once in response to two identical events\. What guarantee does CloudWatch Events offer for triggering rules or delivering events to the targets?](#RuleTriggeredMoreThanOnce)
 + [My events are not delivered to the target Amazon SQS queue](#SQSEncrypted)
 + [My rule is being triggered but I don't see any messages published into my Amazon SNS topic](#NoMessagesPublishedSNS)
@@ -78,9 +79,9 @@ Another reason the Lambda function would fail to trigger is if the policy you se
 
 ## I have just created/modified a rule but it did not match a test event<a name="RuleDoesNotMatch"></a>
 
-When you make a change to a rule or to its targets, incoming events might not immediately start or stop matching to new or updated rules\. Allow a short period of time for changes to take effect\. If, after this short period, events still do not match, you can also check several Events metrics for your rule in CloudWatch such as `TriggeredRules`, `Invocations`, and `FailedInvocations` for further debugging\.
+When you make a change to a rule or to its targets, incoming events might not immediately start or stop matching to new or updated rules\. Allow a short period of time for changes to take effect\. If, after this short period, events still do not match, you can also check CloudWatch metrics for your rule such as `TriggeredRules`, `Invocations`, and `FailedInvocations` for further debugging\. For more information about these metrics, see [Amazon CloudWatch Events Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwe-metricscollected.html) in the *Amazon CloudWatch User Guide*\.
 
-You can also use the `TestEventPattern` action to test the event pattern of your rule with a test event to make sure the event pattern of your rule is correctly set\. For more information, see [TestEventPattern](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_TestEventPattern.html) in the *Amazon CloudWatch Events API Reference*\.
+If the rule is triggered by an event from an AWS service, you can also use the `TestEventPattern` action to test the event pattern of your rule with a test event to make sure the event pattern of your rule is correctly set\. For more information, see [TestEventPattern](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_TestEventPattern.html) in the *Amazon CloudWatch Events API Reference*\.
 
 ## My rule did not self\-trigger at the time specified in the ScheduleExpression<a name="RuleDidNotTrigger"></a>
 
@@ -122,11 +123,15 @@ Moreover, not every event has the resources field populated \(such as AWS API ca
 
 ## My event's delivery to the target experienced a delay<a name="DelayedEventDelivery"></a>
 
-CloudWatch Events tries to deliver an event to a target for up to 24 hours\. The first attempt is made as soon as the event arrives in the event stream\. However, if the target service is having problems or your account is being throttled, CloudWatch Events automatically reschedules another delivery in the future\. If 24 hours has passed since the arrival of event, no more attempts are scheduled and the `FailedInvocations` metric is published in CloudWatch\.
+CloudWatch Events tries to deliver an event to a target for up to 24 hours\. The first attempt is made as soon as the event arrives in the event stream\. However, if the target service is having problems, CloudWatch Events automatically reschedules another delivery in the future\. If 24 hours has passed since the arrival of event, no more attempts are scheduled and the `FailedInvocations` metric is published in CloudWatch\.
+
+## Some events were never delivered to my target<a name="NeverDeliveredToTarget"></a>
+
+If a target of a CloudWatch Events rule is constrained for a prolonged time, CloudWatch Events may not retry delivery\. For example, if the target is not provisioned to handle the incoming event traffic and the target service is throttling the requests that CloudWatch Events makes on your behalf, then CloudWatch Events may not retry delivery\.
 
 ## My rule was triggered more than once in response to two identical events\. What guarantee does CloudWatch Events offer for triggering rules or delivering events to the targets?<a name="RuleTriggeredMoreThanOnce"></a>
 
-CloudWatch Events guarantees triggering a rule at least once in response to an event or to a schedule\. In rare cases, the same rule can be triggered more than once for a single event or scheduled time, or the same target can be invoked more than once for a given triggered rule\.
+In rare cases, the same rule can be triggered more than once for a single event or scheduled time, or the same target can be invoked more than once for a given triggered rule\.
 
 ## My events are not delivered to the target Amazon SQS queue<a name="SQSEncrypted"></a>
 

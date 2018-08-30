@@ -6,21 +6,21 @@ CloudWatch Events does not provide second\-level precision in schedule expressio
 
 ## Step 1: Create an AWS Lambda Function<a name="create-lambda-function"></a>
 
-Create a Lambda function to log the scheduled events\. You specify this function when you create your rule\.
+Create a Lambda function to log the scheduled events\. Specify this function when you create your rule\.
 
 **To create a Lambda function**
 
 1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you are new to Lambda, you see a welcome page; choose **Get Started Now**; otherwise, choose **Create a Lambda function**\.
+1. If you are new to Lambda, you see a welcome page\. Choose **Get Started Now**\. Otherwise, choose **Create a Lambda function**\.
 
-1. On the **Select blueprint** page, type `hello` for the filter, and then choose the **hello\-world** blueprint\.
+1. On the **Select blueprint** page, type `hello` for the filter and choose the **hello\-world** blueprint\.
 
 1. On the **Configure triggers** page, choose **Next**\.
 
 1. On the **Configure function** page, do the following:
 
-   1. Type a name and description for the Lambda function\. \(For example, name the function "LogScheduledEvent"\.\)
+   1. Type a name and description for the Lambda function\. For example, name the function "LogScheduledEvent"\.
 
    1. Edit the sample code for the Lambda function\. For example:
 
@@ -34,7 +34,7 @@ Create a Lambda function to log the scheduled events\. You specify this function
       };
       ```
 
-   1. For **Role**, choose **Choose an existing role** and then choose your basic execution role from **Existing role**\. Otherwise, create a new basic execution role\.
+   1. For **Role**, choose **Choose an existing role**\. For **Existing role**, select your basic execution role\. Otherwise, create a new basic execution role\.
 
    1. Choose **Next**\.
 
@@ -56,7 +56,7 @@ Create a rule to run your Lambda function on a schedule\.
 
    1. Choose **Fixed rate of** and specify the schedule interval \(for example, 5 minutes\)\.
 
-1. For **Targets**, choose **Add target** and then choose **Lambda function**\.
+1. For **Targets**, choose **Add target**, **Lambda function**\.
 
 1. For **Function**, select the Lambda function that you created\.
 
@@ -148,6 +148,6 @@ You can verify that your Lambda function was invoked\.
 
    1. In the navigation pane, choose **Events**, **Rules**\.
 
-   1. Select the rule and then choose **Actions**, **Disable**\.
+   1. Select the rule and choose **Actions**, **Disable**\.
 
    1. When prompted for confirmation, choose **Disable**\.

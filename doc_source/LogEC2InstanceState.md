@@ -1,6 +1,6 @@
 # Tutorial: Log the State of an Amazon EC2 Instance Using CloudWatch Events<a name="LogEC2InstanceState"></a>
 
-You can create a AWS Lambda function that logs the changes in state for an Amazon EC2 instance\. You can choose to create a rule that runs the function whenever there is a state transition or a transition to one or more states that are of interest\. In this tutorial, you log the launch of any new instance\.
+You can create an AWS Lambda function that logs the changes in state for an Amazon EC2 instance\. You can choose to create a rule that runs the function whenever there is a state transition or a transition to one or more states that are of interest\. In this tutorial, you log the launch of any new instance\.
 
 ## Step 1: Create an AWS Lambda Function<a name="ec2-create-lambda-function"></a>
 
@@ -10,15 +10,15 @@ Create a Lambda function to log the state change events\. You specify this funct
 
 1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you are new to Lambda, you see a welcome page; choose **Get Started Now**; otherwise, choose **Create a Lambda function**\.
+1. If you are new to Lambda, you see a welcome page\. Choose **Get Started Now**\. Otherwise, choose **Create a Lambda function**\.
 
-1. On the **Select blueprint** page, type `hello` for the filter, and then choose the **hello\-world** blueprint\.
+1. On the **Select blueprint** page, type `hello` for the filter and choose the **hello\-world** blueprint\.
 
 1. On the **Configure triggers** page, choose **Next**\.
 
 1. On the **Configure function** page, do the following:
 
-   1. Type a name and description for the Lambda function\. \(For example, name the function "LogEC2InstanceStateChange"\.\) 
+   1. Type a name and description for the Lambda function\. For example, name the function "LogEC2InstanceStateChange"\. 
 
    1. Edit the sample code for the Lambda function\. For example:
 
@@ -32,7 +32,7 @@ Create a Lambda function to log the state change events\. You specify this funct
       };
       ```
 
-   1. For **Role**, choose **Choose an existing role** and then choose your basic execution role from **Existing role**\. Otherwise, create a new basic execution role\.
+   1. For **Role**, choose **Choose an existing role**\. For **Existing role**, select your basic execution role\. Otherwise, create a new basic execution role\.
 
    1. Choose **Next**\.
 
@@ -54,14 +54,14 @@ Create a rule to run your Lambda function whenever you launch an Amazon EC2 inst
 
    1. Choose **Build event pattern to match events by service**\.
 
-   1. Choose **EC2** and then choose **EC2 Instance State\-change Notification**\.
+   1. Choose **EC2**, **EC2 Instance State\-change Notification**\.
 
-   1. Choose **Specific state\(s\)** and then choose **Running**\.
+   1. Choose **Specific state\(s\)**, **Running**\.
 
-   1. By default, the rule matches any instance in the region\. To make the rule match a specific instance, choose **Specific instance\(s\)** and then choose one or more instances\.  
+   1. By default, the rule matches any instance in the region\. To make the rule match a specific instance, choose **Specific instance\(s\)** and then select one or more instances\.  
 ![\[The Event selector pane\]](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/images/log_stateec2_using_CWE_1.PNG)
 
-1. For **Targets**, choose **Add target** and then choose **Lambda function**\.
+1. For **Targets**, choose **Add target**, **Lambda function**\.
 
 1. For **Function**, select the Lambda function that you created\.
 
