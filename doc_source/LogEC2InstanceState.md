@@ -79,7 +79,7 @@ To test your rule, launch an Amazon EC2 instance\. After waiting a few minutes f
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. Launch an instance\. For more information, see [Launch Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. Launch an instance\. For more information, see [Launch Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
@@ -93,4 +93,4 @@ To test your rule, launch an Amazon EC2 instance\. After waiting a few minutes f
 
    1. Choose the name of log stream to view the data provided by the function for the instance that you launched\.
 
-1. \(Optional\) When you are finished, you can open the Amazon EC2 console and stop or terminate the instance that you launched\. For more information, see [Terminate Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. \(Optional\) When you are finished, you can open the Amazon EC2 console and stop or terminate the instance that you launched\. For more information, see [Terminate Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide for Linux Instances*\.

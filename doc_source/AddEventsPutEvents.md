@@ -1,6 +1,6 @@
 # Adding Events with PutEvents<a name="AddEventsPutEvents"></a>
 
-The `PutEvents` action sends multiple events to CloudWatch Events in a single request\. For more information, see [PutEvents](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutEvents.html) in the *Amazon CloudWatch Events API Reference* and [put\-events](http://docs.aws.amazon.com/cli/latest/reference/events/put-events.html) in the *AWS CLI Command Reference*\.
+The `PutEvents` action sends multiple events to CloudWatch Events in a single request\. For more information, see [PutEvents](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutEvents.html) in the *Amazon CloudWatch Events API Reference* and [put\-events](https://docs.aws.amazon.com/cli/latest/reference/events/put-events.html) in the *AWS CLI Command Reference*\.
 
 Each `PutEvents` request can support a limited number of entries\. For more information, see [CloudWatch Events Limits](cloudwatch_limits_cwe.md)\. The `PutEvents` operation attempts to process all entries in the natural order of the request\. Each event has a unique id that is assigned by CloudWatch Events after you call `PutEvents`\.
 

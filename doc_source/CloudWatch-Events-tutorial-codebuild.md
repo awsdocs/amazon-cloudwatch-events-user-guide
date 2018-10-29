@@ -22,7 +22,7 @@ In the example in this tutorial, you schedule AWS CodeBuild to run a build every
 
    In the box under **Constant \(JSON text\)**, type the following to set the timeout override to 30 minutes for these scheduled builds: **\{ "timeoutInMinutesOverride": 30 \}**
 
-   For more information about the parameters you can pass, see [StartBuild](http://docs.aws.amazon.com/codebuild/latest/APIReference/API_StartBuild.html)\. You cannot pass the `projectName` parameter in this field\. Instead, you specify the project using the ARN in **Project ARN**\.
+   For more information about the parameters you can pass, see [StartBuild](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_StartBuild.html)\. You cannot pass the `projectName` parameter in this field\. Instead, you specify the project using the ARN in **Project ARN**\.
 
 1. CloudWatch Events can create the IAM role needed for your build project to run: 
    + To create an IAM role automatically, choose **Create a new role for this specific resource**\.

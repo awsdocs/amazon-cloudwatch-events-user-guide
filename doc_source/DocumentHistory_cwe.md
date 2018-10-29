@@ -4,7 +4,7 @@ The following table describes important changes in each release of the CloudWatc
 
 | Change | Description | Date | 
 | --- |--- |--- |
-| Support for Amazon VPC endpoints | You can now establish a private connection between your VPC and CloudWatch Events\. For more information, see [Using CloudWatch Events with Interface VPC Endpoints](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/cloudwatch-events-and-interface-VPC.html) in the *Amazon CloudWatch Events User Guide*\. | June 28, 2018 | 
+| [Support for Amazon VPC endpoints](#DocumentHistory_cwe) | You can now establish a private connection between your VPC and CloudWatch Events\. For more information, see [Using CloudWatch Events with Interface VPC Endpoints](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/cloudwatch-events-and-interface-VPC.html) in the *Amazon CloudWatch Events User Guide*\. | June 28, 2018 | 
 
 The following table describes the important changes to the *Amazon CloudWatch Events User Guide*\.
 
@@ -12,7 +12,7 @@ The following table describes the important changes to the *Amazon CloudWatch Ev
 | Change | Description | Release Date | 
 | --- | --- | --- | 
 |  AWS CodeBuild as a target  |  Added AWS CodeBuild as a target for event rules\. For more information, see [Tutorial: Schedule Automated Builds Using AWS CodeBuild](CloudWatch-Events-tutorial-codebuild.md)\.  |  13 December 2017  | 
-|  AWS Batch as a target  |  Added AWS Batch as a target for Event rules\. For more information, see [AWS Batch Events](http://docs.aws.amazon.com/batch/latest/userguide/batch_cwe_events.html)\.  |  8 September 2017  | 
+|  AWS Batch as a target  |  Added AWS Batch as a target for Event rules\. For more information, see [AWS Batch Events](https://docs.aws.amazon.com/batch/latest/userguide/batch_cwe_events.html)\.  |  8 September 2017  | 
 |  AWS CodePipeline and AWS Glue events  |  Added support for events from AWS CodePipeline and AWS Glue\. For more information, see [AWS CodePipeline Events](EventTypes.md#codepipeline_event_type) and [AWS Glue Events](EventTypes.md#glue-event-types)\.  |  8 September 2017  | 
 |  AWS CodeBuild and AWS CodeCommit events  |  Added support for events from AWS CodeBuild and AWS CodeCommit\. For more information, see [AWS CodeBuild Events](EventTypes.md#codebuild_event_type)\.  |  3 August 2017  | 
 |  Additional targets supported  |  AWS CodePipeline and Amazon Inspector can be targets of events\.  |  29 June 2017  | 

@@ -2,7 +2,7 @@
 
 When a rule is triggered in CloudWatch Events, all the targets associated with the rule are invoked\. *Invocation* means invoking the AWS Lambda functions, publishing to the Amazon SNS topics, and relaying the event to the Kinesis streams\. In order to be able to make API calls against the resources you own, CloudWatch Events needs the appropriate permissions\. For Lambda, Amazon SNS, and Amazon SQS resources, CloudWatch Events relies on resource\-based policies\. For Kinesis streams, CloudWatch Events relies on IAM roles\.
 
-You can use the following permissions to invoke the targets associated with your CloudWatch Events rules\. The procedures below use the AWS CLI to add permissions to your targets\. For information about how to install and configure the AWS CLI, see [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) in the *AWS Command Line Interface User Guide*\.
+You can use the following permissions to invoke the targets associated with your CloudWatch Events rules\. The procedures below use the AWS CLI to add permissions to your targets\. For information about how to install and configure the AWS CLI, see [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) in the *AWS Command Line Interface User Guide*\.
 
 **Topics**
 + [AWS Lambda Permissions](#lambda-permissions)
@@ -41,7 +41,7 @@ To invoke your AWS Lambda function using a CloudWatch Events rule, add the follo
   --source-arn "arn:aws:events:region:account-id:rule/rule-name"
   ```
 
-For more information about setting permissions that enable CloudWatch Events to invoke Lambda functions, see [AddPermission](http://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) and [Using Lambda with Scheduled Events](http://docs.aws.amazon.com/lambda/latest/dg/with-scheduled-events.html) in the *AWS Lambda Developer Guide*\.
+For more information about setting permissions that enable CloudWatch Events to invoke Lambda functions, see [AddPermission](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) and [Using Lambda with Scheduled Events](https://docs.aws.amazon.com/lambda/latest/dg/with-scheduled-events.html) in the *AWS Lambda Developer Guide*\.
 
 ## Amazon SNS Permissions<a name="sns-permissions"></a>
 
@@ -100,7 +100,7 @@ To allow CloudWatch Events to publish an Amazon SNS topic, use the `aws sns get-
    --attribute-value "{\"Version\":\"2012-10-17\",\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Sid\":\"__default_statement_ID\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Resource\":\"arn:aws:sns:region:account-id:topic-name\",\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"account-id\"}}}, {\"Sid\":\"TrustCWEToPublishEventsToMyTopic\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"sns:Publish\",\"Resource\":\"arn:aws:sns:region:account-id:topic-name\"}]}"
    ```
 
-For more information, see the [SetTopicAttributes](http://docs.aws.amazon.com/sns/latest/api/API_SetTopicAttributes.html) action in the *Amazon Simple Notification Service API Reference*\.
+For more information, see the [SetTopicAttributes](https://docs.aws.amazon.com/sns/latest/api/API_SetTopicAttributes.html) action in the *Amazon Simple Notification Service API Reference*\.
 
 ## Amazon SQS Permissions<a name="sqs-permissions"></a>
 
@@ -161,4 +161,4 @@ To allow a CloudWatch Events rule to invoke an Amazon SQS queue, use the `aws sq
 
    If the SQS queue already has a policy, you need to copy the original policy and combine it with a new statement in the set\-queue\-attributes\.json file and run the preceding command to update the policy\.
 
-For more information, see [Amazon SQS Policy Examples](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSExamples.html) in the *Amazon Simple Queue Service Developer Guide*\.
+For more information, see [Amazon SQS Policy Examples](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSExamples.html) in the *Amazon Simple Queue Service Developer Guide*\.

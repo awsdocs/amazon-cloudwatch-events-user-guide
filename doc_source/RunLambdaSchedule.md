@@ -1,6 +1,6 @@
 # Tutorial: Schedule AWS Lambda Functions Using CloudWatch Events<a name="RunLambdaSchedule"></a>
 
-You can set up a rule to run an AWS Lambda function on a schedule\. This tutorial shows how to use the AWS Management Console or the AWS CLI to create the rule\. If you would like to use the AWS CLI but have not installed it, see the [AWS Command Line Interface User Guide](http://docs.aws.amazon.com/cli/latest/userguide/)\.
+You can set up a rule to run an AWS Lambda function on a schedule\. This tutorial shows how to use the AWS Management Console or the AWS CLI to create the rule\. If you would like to use the AWS CLI but have not installed it, see the [AWS Command Line Interface User Guide](https://docs.aws.amazon.com/cli/latest/userguide/)\.
 
 CloudWatch Events does not provide second\-level precision in schedule expressions\. The finest resolution using a cron expression is a minute\. Due to the distributed nature of the CloudWatch Events and the target services, the delay between the time the scheduled rule is triggered and the time the target service honors the execution of the target resource might be several seconds\. Your scheduled rule is triggered within that minute but not on the precise 0th second\.
 
@@ -70,7 +70,7 @@ If you prefer, you can create the rule using the AWS CLI\. First, you must grant
 
 **To create a rule using the AWS CLI**
 
-1. Use the following [put\-rule](http://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command to create a rule that triggers itself on a schedule:
+1. Use the following [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command to create a rule that triggers itself on a schedule:
 
    ```
    aws events put-rule \
@@ -96,7 +96,7 @@ If you prefer, you can create the rule using the AWS CLI\. First, you must grant
    }
    ```
 
-1. Use the following [add\-permission](http://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html) command to trust the CloudWatch Events service principal \(events\.amazonaws\.com\) and scope permissions to the rule with the specified Amazon Resource Name \(ARN\):
+1. Use the following [add\-permission](https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html) command to trust the CloudWatch Events service principal \(events\.amazonaws\.com\) and scope permissions to the rule with the specified Amazon Resource Name \(ARN\):
 
    ```
    aws lambda add-permission \
@@ -107,7 +107,7 @@ If you prefer, you can create the rule using the AWS CLI\. First, you must grant
    --source-arn arn:aws:events:us-east-1:123456789012:rule/my-scheduled-rule
    ```
 
-1. Use the following [put\-targets](http://docs.aws.amazon.com/cli/latest/reference/events/put-targets.html) command to add the Lambda function that you created to this rule so that it runs every five minutes:
+1. Use the following [put\-targets](https://docs.aws.amazon.com/cli/latest/reference/events/put-targets.html) command to add the Lambda function that you created to this rule so that it runs every five minutes:
 
    ```
    aws events put-targets --rule my-scheduled-rule --targets file://targets.json
@@ -124,9 +124,9 @@ If you prefer, you can create the rule using the AWS CLI\. First, you must grant
    ]
    ```
 
-## Step 3: Test the Rule<a name="schedule-test-rule"></a>
+## Step 3: Verify the Rule<a name="schedule-test-rule"></a>
 
-You can verify that your Lambda function was invoked\.
+At least five minutes after completing Step 2, you can verify that your Lambda function was invoked\.
 
 **To test your rule**
 

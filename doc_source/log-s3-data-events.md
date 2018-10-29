@@ -24,7 +24,7 @@ To log data events for an S3 bucket to AWS CloudTrail and CloudWatch Events, cre
 
 1. Choose **Create**\.
 
-For more information, see [Data Events](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events) in the AWS CloudTrail User Guide\. 
+For more information, see [Data Events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events) in the AWS CloudTrail User Guide\. 
 
 ## Step 2: Create an AWS Lambda Function<a name="log-s3-create-lambda-function"></a>
 
@@ -109,4 +109,4 @@ To test the rule, put an object in your S3 bucket\. You can verify that your Lam
 
 1. Select the name of log stream to view the data provided by the function for the instance that you launched\.
 
-You can also check the contents of your CloudTrail logs in the S3 bucket that you specified for your trail\. For more information, see [Getting and Viewing Your CloudTrail Log Files](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html) in the *AWS CloudTrail User Guide*\.
+You can also check the contents of your CloudTrail logs in the S3 bucket that you specified for your trail\. For more information, see [Getting and Viewing Your CloudTrail Log Files](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html) in the *AWS CloudTrail User Guide*\.

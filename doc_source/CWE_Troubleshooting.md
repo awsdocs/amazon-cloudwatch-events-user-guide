@@ -12,7 +12,8 @@ You can use the steps in this section to troubleshoot CloudWatch Events\.
 + [I created a rule with an EventPattern that is supposed to match a resource, but I don't see any events that match the rule](#EventsDoNotMatchRule)
 + [My event's delivery to the target experienced a delay](#DelayedEventDelivery)
 + [Some events were never delivered to my target](#NeverDeliveredToTarget)
-+ [My rule was triggered more than once in response to two identical events\. What guarantee does CloudWatch Events offer for triggering rules or delivering events to the targets?](#RuleTriggeredMoreThanOnce)
++ [My rule was triggered more than once in response to one event\. What guarantee does CloudWatch Events offer for triggering rules or delivering events to the targets?](#RuleTriggeredMoreThanOnce)
++ [Preventing Infinite Loops](#PreventInfiniteLoops)
 + [My events are not delivered to the target Amazon SQS queue](#SQSEncrypted)
 + [My rule is being triggered but I don't see any messages published into my Amazon SNS topic](#NoMessagesPublishedSNS)
 + [My Amazon SNS topic still has permissions for CloudWatch Events even after I deleted the rule associated with the Amazon SNS topic](#SNSPermissionsPersist)
@@ -79,9 +80,9 @@ Another reason the Lambda function would fail to trigger is if the policy you se
 
 ## I have just created/modified a rule but it did not match a test event<a name="RuleDoesNotMatch"></a>
 
-When you make a change to a rule or to its targets, incoming events might not immediately start or stop matching to new or updated rules\. Allow a short period of time for changes to take effect\. If, after this short period, events still do not match, you can also check CloudWatch metrics for your rule such as `TriggeredRules`, `Invocations`, and `FailedInvocations` for further debugging\. For more information about these metrics, see [Amazon CloudWatch Events Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwe-metricscollected.html) in the *Amazon CloudWatch User Guide*\.
+When you make a change to a rule or to its targets, incoming events might not immediately start or stop matching to new or updated rules\. Allow a short period of time for changes to take effect\. If, after this short period, events still do not match, you can also check CloudWatch metrics for your rule such as `TriggeredRules`, `Invocations`, and `FailedInvocations` for further debugging\. For more information about these metrics, see [Amazon CloudWatch Events Metrics and Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwe-metricscollected.html) in the *Amazon CloudWatch User Guide*\.
 
-If the rule is triggered by an event from an AWS service, you can also use the `TestEventPattern` action to test the event pattern of your rule with a test event to make sure the event pattern of your rule is correctly set\. For more information, see [TestEventPattern](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_TestEventPattern.html) in the *Amazon CloudWatch Events API Reference*\.
+If the rule is triggered by an event from an AWS service, you can also use the `TestEventPattern` action to test the event pattern of your rule with a test event to make sure the event pattern of your rule is correctly set\. For more information, see [TestEventPattern](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_TestEventPattern.html) in the *Amazon CloudWatch Events API Reference*\.
 
 ## My rule did not self\-trigger at the time specified in the ScheduleExpression<a name="RuleDidNotTrigger"></a>
 
@@ -107,13 +108,13 @@ CloudWatch Events does not provide second\-level precision in schedule expressio
 
 ## My rule matches IAM API calls but my rule was not triggered<a name="RuleDidNotTriggerIAM"></a>
 
-The IAM service is only available in the US East \(N\. Virginia\) Region, so any AWS API call events from IAM are only available in that region\. For more information, see [CloudWatch Events Event Examples From Each Supported Service](EventTypes.md)\.
+The IAM service is only available in the US East \(N\. Virginia\) Region, so any AWS API call events from IAM are only available in that region\. For more information, see [CloudWatch Events Event Examples From Supported Services](EventTypes.md)\.
 
 ## My rule is not working because the IAM role associated with the rule is ignored when the rule is triggered<a name="IAMRoleIgnored"></a>
 
 IAM roles for rules are only used for relating events to Kinesis streams\. For Lambda functions and Amazon SNS topics, you need to provide resource\-based permissions\.
 
-Make sure your regional AWS STS endpoints are enabled\. CloudWatch Events talks to the regional AWS STS endpoints when assuming the IAM role you provided\. For more information, see [Activating and Deactivating AWS STS in an AWS Region](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the *IAM User Guide*\.
+Make sure your regional AWS STS endpoints are enabled\. CloudWatch Events talks to the regional AWS STS endpoints when assuming the IAM role you provided\. For more information, see [Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the *IAM User Guide*\.
 
 ## I created a rule with an EventPattern that is supposed to match a resource, but I don't see any events that match the rule<a name="EventsDoNotMatchRule"></a>
 
@@ -123,15 +124,23 @@ Moreover, not every event has the resources field populated \(such as AWS API ca
 
 ## My event's delivery to the target experienced a delay<a name="DelayedEventDelivery"></a>
 
-CloudWatch Events tries to deliver an event to a target for up to 24 hours\. The first attempt is made as soon as the event arrives in the event stream\. However, if the target service is having problems, CloudWatch Events automatically reschedules another delivery in the future\. If 24 hours has passed since the arrival of event, no more attempts are scheduled and the `FailedInvocations` metric is published in CloudWatch\.
+CloudWatch Events tries to deliver an event to a target for up to 24 hours, except in scenarios where your target resource is constrained\. The first attempt is made as soon as the event arrives in the event stream\. However, if the target service is having problems, CloudWatch Events automatically reschedules another delivery in the future\. If 24 hours has passed since the arrival of event, no more attempts are scheduled and the `FailedInvocations` metric is published in CloudWatch\. We recommend that you create a CloudWatch alarm on the `FailedInvocations` metric\.
 
 ## Some events were never delivered to my target<a name="NeverDeliveredToTarget"></a>
 
 If a target of a CloudWatch Events rule is constrained for a prolonged time, CloudWatch Events may not retry delivery\. For example, if the target is not provisioned to handle the incoming event traffic and the target service is throttling the requests that CloudWatch Events makes on your behalf, then CloudWatch Events may not retry delivery\.
 
-## My rule was triggered more than once in response to two identical events\. What guarantee does CloudWatch Events offer for triggering rules or delivering events to the targets?<a name="RuleTriggeredMoreThanOnce"></a>
+## My rule was triggered more than once in response to one event\. What guarantee does CloudWatch Events offer for triggering rules or delivering events to the targets?<a name="RuleTriggeredMoreThanOnce"></a>
 
 In rare cases, the same rule can be triggered more than once for a single event or scheduled time, or the same target can be invoked more than once for a given triggered rule\.
+
+## Preventing Infinite Loops<a name="PreventInfiniteLoops"></a>
+
+In CloudWatch Events, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly\. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state\. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop\.
+
+To prevent this, write the rules so that the triggered actions do not re\-fire the same rule\. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change\. 
+
+An infinite loop can quickly cause higher than expected charges\. We recommend that you use budgeting, which alerts you when charges exceed your specified limit\. For more information, see [Managing Your Costs with Budgets](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html)\.
 
 ## My events are not delivered to the target Amazon SQS queue<a name="SQSEncrypted"></a>
 
@@ -230,11 +239,11 @@ If the policy is incorrect, you can also edit the rule in the CloudWatch Events 
 
 ## My Amazon SNS topic still has permissions for CloudWatch Events even after I deleted the rule associated with the Amazon SNS topic<a name="SNSPermissionsPersist"></a>
 
-When you create a rule with Amazon SNS as the target, CloudWatch Events adds the permission to your Amazon SNS topic on your behalf\. If you delete the rule shortly after you create it, CloudWatch Events might be unable to remove the permission from your Amazon SNS topic\. If this happens, you can remove the permission from the topic using the [aws sns set\-topic\-attributes](http://docs.aws.amazon.com/cli/latest/reference/sns/set-topic-attributes.html) command\. For more information about resource\-based permissions for sending events, see [Using Resource\-Based Policies for CloudWatch Events](resource-based-policies-cwe.md)\.
+When you create a rule with Amazon SNS as the target, CloudWatch Events adds the permission to your Amazon SNS topic on your behalf\. If you delete the rule shortly after you create it, CloudWatch Events might be unable to remove the permission from your Amazon SNS topic\. If this happens, you can remove the permission from the topic using the [aws sns set\-topic\-attributes](https://docs.aws.amazon.com/cli/latest/reference/sns/set-topic-attributes.html) command\. For more information about resource\-based permissions for sending events, see [Using Resource\-Based Policies for CloudWatch Events](resource-based-policies-cwe.md)\.
 
 ## Which IAM condition keys can I use with CloudWatch Events<a name="SupportedAccessPolicies"></a>
 
-CloudWatch Events supports the AWS\-wide condition keys \(see [Available Keys](http://docs.aws.amazon.com/IAM/latest/UserGuide/AvailableKeys.html) in the *IAM User Guide*\), plus the following service\-specific condition keys\. For more information, see [Using IAM Policy Conditions for Fine\-Grained Access Control](policy-keys-cwe.md)\.
+CloudWatch Events supports the AWS\-wide condition keys \(see [Available Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/AvailableKeys.html) in the *IAM User Guide*\), plus the following service\-specific condition keys\. For more information, see [Using IAM Policy Conditions for Fine\-Grained Access Control](policy-keys-cwe.md)\.
 
 ## How can I tell when CloudWatch Events rules are broken<a name="CreateAlarmBrokenEventRules"></a>
 

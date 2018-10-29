@@ -82,7 +82,7 @@ The full set of permissions required to work with the CloudWatch console are lis
 
 ## AWS Managed \(Predefined\) Policies for CloudWatch Events<a name="managed-policies-cwe"></a>
 
-AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
+AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to CloudWatch Events:
 + **CloudWatchEventsFullAccess** – Grants full access to CloudWatch Events\.
@@ -98,12 +98,12 @@ In order for CloudWatch Events to relay events to your Kinesis stream targets, y
 
 1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role\. As you follow the steps to create a role, do the following:
+1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role\. As you follow the steps to create a role, do the following:
    + In **Role Name**, use a name that is unique within your AWS account \(for example, **CloudWatchEventsSending**\)\. 
    + In **Select Role Type**, choose **AWS Service Roles**, and then choose **Amazon CloudWatch Events**\. This grants CloudWatch Events permissions to assume the role\.
    + In **Attach Policy**, choose **CloudWatchEventsInvocationAccess**\.
 
-You can also create your own custom IAM policies to allow permissions for CloudWatch Events actions and resources\. You can attach these custom policies to the IAM users or groups that require those permissions\. For more information about IAM policies, see [Overview of IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) in the *IAM User Guide*\. For more information about managing and creating custom IAM policies, see [Managing IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
+You can also create your own custom IAM policies to allow permissions for CloudWatch Events actions and resources\. You can attach these custom policies to the IAM users or groups that require those permissions\. For more information about IAM policies, see [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) in the *IAM User Guide*\. For more information about managing and creating custom IAM policies, see [Managing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingPolicies.html) in the *IAM User Guide*\.
 
 ## Permissions Required for CloudWatch Events to Access Certain Targets<a name="target-permissions-cwe"></a>
 

@@ -58,7 +58,7 @@ You can use the following sample cron strings when creating a rule with schedule
 |  0/10  |  \*  |  ?  |  \*  |  MON\-FRI  |  \*  |  Run every 10 minutes Monday through Friday  | 
 |  0/5  |  8\-17  |  ?  |  \*  |  MON\-FRI  |  \*  |  Run every 5 minutes Monday through Friday between 8:00 am and 5:55 pm \(UTC\)  | 
 
-The following examples show how to use Cron expressions with the AWS CLI [put\-rule](http://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\. The first example creates a rule that is triggered every day at 12:00pm UTC\.
+The following examples show how to use Cron expressions with the AWS CLI [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\. The first example creates a rule that is triggered every day at 12:00pm UTC\.
 
 ```
 aws events put-rule --schedule-expression "cron(0 12 * * ? *)" --name MyRule1
@@ -99,7 +99,7 @@ Valid values: minute \| minutes \| hour \| hours \| day \| days
 If the value is equal to 1, then the unit must be singular\. Similarly, for values greater than 1, the unit must be plural\. For example, rate\(1 hours\) and rate\(5 hour\) are not valid, but rate\(1 hour\) and rate\(5 hours\) are valid\.
 
 **Examples**  
-The following examples show how to use rate expressions with the AWS CLI [put\-rule](http://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\.
+The following examples show how to use rate expressions with the AWS CLI [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\.
 
 ```
 aws events put-rule --schedule-expression "rate(5 minutes)" --name MyRule3

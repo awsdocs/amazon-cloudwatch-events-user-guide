@@ -4,17 +4,17 @@ You can relay AWS API call events in CloudWatch Events to a stream in Amazon Kin
 
 ## Prerequisite<a name="stream-prerequisite"></a>
 
-Install the AWS CLI\. For more information, see the [AWS Command Line Interface User Guide](http://docs.aws.amazon.com/cli/latest/userguide/)\.
+Install the AWS CLI\. For more information, see the [AWS Command Line Interface User Guide](https://docs.aws.amazon.com/cli/latest/userguide/)\.
 
 ## Step 1: Create an Amazon Kinesis Stream<a name="stream-create-stream"></a>
 
-Use the following [create\-stream](http://docs.aws.amazon.com/cli/latest/reference/kinesis/create-stream.html) command to create a stream\.
+Use the following [create\-stream](https://docs.aws.amazon.com/cli/latest/reference/kinesis/create-stream.html) command to create a stream\.
 
 ```
 aws kinesis create-stream --stream-name test --shard-count 1
 ```
 
-When the stream status is `ACTIVE`, the stream is ready\. Use the following [describe\-stream](http://docs.aws.amazon.com/cli/latest/reference/kinesis/describe-stream.html) command to check the stream status:
+When the stream status is `ACTIVE`, the stream is ready\. Use the following [describe\-stream](https://docs.aws.amazon.com/cli/latest/reference/kinesis/describe-stream.html) command to check the stream status:
 
 ```
 aws kinesis describe-stream --stream-name test
@@ -60,13 +60,13 @@ To test your rule, stop an Amazon EC2 instance\. After waiting a few minutes for
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. Launch an instance\. For more information, see [Launch Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. Launch an instance\. For more information, see [Launch Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
 1. In the navigation pane, choose **Events**, **Rules**, select the name of the rule that you created, and choose **Show metrics for the rule**\.
 
-1. \(Optional\) When you are finished, you can terminate the instance\. For more information, see [Terminate Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. \(Optional\) When you are finished, you can terminate the instance\. For more information, see [Terminate Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 ## Step 4: Verify That the Event is Relayed<a name="stream-verify-event"></a>
 
@@ -74,7 +74,7 @@ You can get the record from the stream to verify that the event was relayed\.
 
 **To get the record**
 
-1. Use the following [get\-shard\-iterator](http://docs.aws.amazon.com/cli/latest/reference/kinesis/get-shard-iterator.html) command to start reading from your Kinesis stream:
+1. Use the following [get\-shard\-iterator](https://docs.aws.amazon.com/cli/latest/reference/kinesis/get-shard-iterator.html) command to start reading from your Kinesis stream:
 
    ```
    aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name test
