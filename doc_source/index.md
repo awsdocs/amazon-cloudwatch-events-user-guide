@@ -15,7 +15,6 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What is Amazon CloudWatch Events?](WhatIsCloudWatchEvents.md)
-   + [CloudWatch Events Limits](cloudwatch_limits_cwe.md)
 + [Setting Up Amazon CloudWatch Events](GettingSetup_cwe.md)
 + [Getting Started with Amazon CloudWatch Events](CWE_GettingStarted.md)
    + [Creating a CloudWatch Events Rule That Triggers on an Event](Create-CloudWatch-Events-Rule.md)
@@ -43,6 +42,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Calculating PutEvents Event Entry Sizes](CalculatePutEventsEntrySize.md)
 + [Using CloudWatch Events with Interface VPC Endpoints](cloudwatch-events-and-interface-VPC.md)
 + [Monitoring Usage with CloudWatch Metrics](CloudWatch-Events-Monitoring-CloudWatch-Metrics.md)
++ [Amazon CloudWatch Events Managed Rules](CloudWatch-Events-Managed-Rules.md)
 + [Authentication and Access Control for Amazon CloudWatch Events](auth-and-access-control-cwe.md)
    + [Overview of Managing Access Permissions to Your CloudWatch Events Resources](iam-access-control-identity-based-cwe.md)
    + [Using Identity-Based Policies (IAM Policies) for CloudWatch Events](iam-identity-based-access-control-cwe.md)
@@ -50,6 +50,7 @@ Amazon's trademarks and trade dress may not be used in
    + [CloudWatch Events Permissions Reference](permissions-reference-cwe.md)
    + [Using IAM Policy Conditions for Fine-Grained Access Control](policy-keys-cwe.md)
 + [Logging Amazon CloudWatch Events API Calls with AWS CloudTrail](logging_cw_api_calls_cwe.md)
++ [CloudWatch Events Limits](cloudwatch_limits_cwe.md)
 + [Troubleshooting CloudWatch Events](CWE_Troubleshooting.md)
 + [Document History](DocumentHistory_cwe.md)
 + [AWS Glossary](glossary.md)

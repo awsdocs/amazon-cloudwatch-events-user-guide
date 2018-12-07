@@ -176,7 +176,7 @@ To send events to another account, configure a CloudWatch Events rule that has t
 
 If your account is set up to receive events from other AWS accounts, you can write rules that match those events\. Set the event pattern of the rule to match the events you are receiving from the other account\.
 
-Unless you specify `account` in the event pattern of a rule, any of your account's rules, both new and existing, that match events you receive from other accounts will trigger based on those events\. If you are receiving events from another account, and you want a rule to trigger only on that event pattern when it is generated from your own account, you must add `account` and specify your own account ID to the event pattern of the rule\.
+Unless you specify `account` in the event pattern of a rule, any of your account's rules, both new and existing, that match events you receive from other accounts trigger based on those events\. If you are receiving events from another account, and you want a rule to trigger only on that event pattern when it is generated from your own account, you must add `account` and specify your own account ID to the event pattern of the rule\.
 
 If you set up your AWS account to accept events from all AWS accounts, we strongly recommend that you add `account` to every CloudWatch Events rule in your account\. This prevents rules in your account from triggering on events from unknown AWS accounts\. When you specify the `account` field in the rule, you can specify the account IDs of more than one AWS account in the field\.
 
@@ -231,3 +231,84 @@ To have a rule trigger on a matching event from any AWS account that you have gr
   ```
   aws events put-rule --name "EC2InstanceStateChanges" --event-pattern "{\"account\":["123456789012", "111122223333"],\"source\":[\"aws.ec2\"],\"detail-type\":[\"EC2 Instance State-change Notification\"]}"  --role-arn "arn:aws:iam::123456789012:role/MyRoleForThisRule"
   ```
+
+## Migrate a Sender\-Receiver Relationship to Use AWS Organizations<a name="MigratingRulesForOrganizations"></a>
+
+If you have a sender account that had permissions granted directly to its account ID, and you now want to revoke those permissions and give the sending account access by granting permissions to an organization, you must take some additional steps\. These steps ensure that the events from the sender account can still get to the receiver account\. This is because accounts that are given permission to send events via an organization must also use an IAM role to do so\.
+
+**To add the permissions necessary to migrate a sender\-receiver relationship**
+
+1. In the sender account, create an IAM role with policies that enable it to send events to the receiver account\. 
+
+   1. Create a file named `assume-role-policy-document.json`, with the following content:
+
+      ```
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "events.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+      ```
+
+   1. To create the IAM role, enter the following command:
+
+      ```
+      $ aws iam create-role \
+      --profile sender \
+      --role-name event-delivery-role \
+      --assume-role-policy-document file://assume-role-policy-document.json
+      ```
+
+   1. Create a file named `permission-policy.json` with the following content:
+
+      ```
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "events:PutEvents"
+            ],
+            "Resource": [
+              "arn:aws:events:us-east-1:${receiver_account_id}:event-bus/default"
+            ]
+          }
+        ]
+      }
+      ```
+
+   1. Enter the following command to attach this policy to the role:
+
+      ```
+      $ aws iam put-role-policy \
+      --profile sender \
+      --role-name event-delivery-role \
+      --policy-name EventBusDeliveryRolePolicy
+      --policy-document file://permission-policy.json
+      ```
+
+1. Edit each existing rule in the sender account that has the receiver account default event bus as a target\. Edit the rule by adding the role that you created in step 1 to the target information\. Use the following command:
+
+   ```
+   aws events put-targets --rule Rulename --targets "Id"="MyID","Arn"="arn:aws:events:region:$ReceiverAccountID:event-bus/default","RoleArn"="arn:aws:iam:${sender_account_id}:role/event-delivery-role"
+   ```
+
+1. In the receiver account, run the following command to grant permissions for the accounts in the organization to send events to the receiver account:
+
+   ```
+   aws events put-permission --action events:PutEvents --statement-id Sid-For-Organization --principal \* --condition '{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "SenderOrganizationID"}'
+   ```
+
+   Optionally, you can also revoke the permissions originally granted directly to the sender account:
+
+   ```
+   aws events remove-permission --statement-id Sid-for-SenderAccount
+   ```
