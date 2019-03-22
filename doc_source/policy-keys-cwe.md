@@ -8,7 +8,7 @@ You can also use placeholders when you specify conditions\. For more information
 
 By default, IAM users and roles can't access the events in your account\. To consume events, a user must be authorized for the `PutRule` API action\. If you allow an IAM user or role for the `events:PutRule` action in their policy, then they will be able to create a rule that matches certain events\. You must add a target to a rule, otherwise, a rule without a target does nothing except publish a CloudWatch metric when it matches an incoming event\. Your IAM user or role must have permissions for the `events:PutTargets` action\.
 
-It is possible to limit access to the events by scoping the authorization to specific sources and types of events \(using the `events:source` and `events:detail-type` condition keys\)\. You can provide a condition in the policy statement of the IAM user or role that allows them to create a rule that only matches a specific set of sources and detail types\. For a list showing all of condition key values and the CloudWatch Events actions and resources that they apply to, see [Using IAM Policy Conditions for Fine\-Grained Access Control](#policy-keys-cwe)\.
+It is possible to limit access to the events by scoping the authorization to specific sources and types of events \(using the `events:source` and `events:detail-type` condition keys\)\. You can provide a condition in the policy statement of the IAM user or role that allows them to create a rule that only matches a specific set of sources and detail types\.
 
 Similarly, through setting conditions in your policy statements, you can decide which specific resources in your accounts can be added to a rule by an IAM user or role \(using the `events:TargetArn` condition key\)\. For example, if you turn on CloudTrail in your account and you have a CloudTrail stream, CloudTrail events are also available to the users in your account through CloudWatch Events\. If you want your users to use CloudWatch Events and access all the events but the CloudTrail events, you can add a deny statement on the `PutRule` API action with a condition that any rule created by that user or role cannot match the CloudTrail event type\.
 
@@ -19,7 +19,9 @@ For CloudTrail events, you can limit the access to a specific principal that the
 | --- | --- | --- | 
 |  `events:source`  |  `"events:source":"source "` Where *source* is the literal string for the source field of the event such as `"aws.ec2"` and `"aws.s3"`\. To see more possible values for *source*, see the example events in [CloudWatch Events Event Examples From Supported Services](EventTypes.md)\.  |  Source, Null  | 
 |  `events:detail-type`  |  `"events:detail-type":"detail-type "` Where *detail\-type* is the literal string for the **detail\-type** field of the event such as `"AWS API Call via CloudTrail"` and `"EC2 Instance State-change Notification"`\. To see more possible values for *detail\-type*, see the example events in [CloudWatch Events Event Examples From Supported Services](EventTypes.md)\.  |  Detail Type, Null  | 
-|  `events: detail.userIdentity.principalId`  |  `"events: detail.userIdentity.principalId":"principal-id"` Where *principal\-id* is the literal string for the **detail\.userIdentity\.principalId** field of the event with detail\-type "AWS API Call via CloudTrail" such as `"AROAIDPPEZS35WEXAMPLE:AssumedRoleSessionName."`\.  |  Principal Id, Null  | 
+|  `events: detail.userIdentity.principalId`  |  `"events:detail.userIdentity.principalId":"principal-id"` Where *principal\-id* is the literal string for the **detail\.userIdentity\.principalId** field of the event with detail\-type "AWS API Call via CloudTrail" such as `"AROAIDPPEZS35WEXAMPLE:AssumedRoleSessionName."`\.  |  Principal Id, Null  | 
+|  `events: detail.service`  |  `"events:detail.service":"service"` Where *service* is the literal string for the **detail\.service** field of the event, such as `"ABUSE"`\.  |  service, Null  | 
+|  `events: detail.eventTypeCode`  |  `"events:detail.eventTypeCode":"eventTypeCode"` Where *eventTypeCode* is the literal string for the **detail\.eventTypeCode** field of the event, such as `"AWS_ABUSE_DOS_REPORT"`\.  |  eventTypeCode, Null  | 
 |  `events:TargetArn`  |  `"events:TargetArn":"target-arn "` Where *target\-arn* is the ARN of the target that can be put to a rule such as `"arn:aws:lambda:*:*:function:*"`\.  |  ARN, Null  | 
 
 For example policy statements for CloudWatch Events, see [Overview of Managing Access Permissions to Your CloudWatch Events Resources](iam-access-control-identity-based-cwe.md)\.
@@ -30,8 +32,10 @@ For example policy statements for CloudWatch Events, see [Overview of Managing A
 + [Example 3: Define a Source and a DetailType That Can Be Used in an Event Pattern](#EventsPatternDetailType)
 + [Example 4: Ensure That the Source Is Defined in the Event Pattern](#SourceDefinedEventsPattern)
 + [Example 5: Define a List of Allowed Sources in an Event Pattern with Multiple Sources](#AllowedSourcesEventsPattern)
-+ [Example 6: Ensure That AWS CloudTrail Events for API Calls from a Certain PrincipalId Are Consumed](#ConsumeSpecificEvents)
-+ [Example 7: Limiting Access to Targets](#LimitingAccessToTargets)
++ [Example 6: Limiting PutRule Access by detail\.service](#LimitRuleByService)
++ [Example 7: Limiting PutRule Access by detail\.eventTypeCode](#LimitRuleByTypeCode)
++ [Example 8: Ensure That AWS CloudTrail Events for API Calls from a Certain PrincipalId Are Consumed](#ConsumeSpecificEvents)
++ [Example 9: Limiting Access to Targets](#LimitingAccessToTargets)
 
 ## Example 1: Limit Access to a Specific Source<a name="EventsLimitAccessControl"></a>
 
@@ -82,7 +86,7 @@ EventPattern is a mandatory argument to `PutRule`\. Hence, if the user with Poli
 }
 ```
 
-The rule would be created because the policy allows for this specific source, that is, "aws\.ec2"\. However, if the user with Policy B calls `PutRule`with an event pattern like the following:
+The rule would be created because the policy allows for this specific source, that is, "aws\.ec2"\. However, if the user with Policy B calls `PutRule` with an event pattern like the following:
 
 ```
 {
@@ -239,7 +243,59 @@ See the following table for examples of event patterns that would be allowed or 
 |  <pre>{<br />    "source": [ "aws.ec2", "aws.autoscaling" ]<br />}</pre>  |  No  | 
 |  <pre>{<br />    "detail-type": [ "EC2 Instance State-change Notification" ]<br />}</pre>  |  No  | 
 
-## Example 6: Ensure That AWS CloudTrail Events for API Calls from a Certain PrincipalId Are Consumed<a name="ConsumeSpecificEvents"></a>
+## Example 6: Limiting PutRule Access by detail\.service<a name="LimitRuleByService"></a>
+
+You can restrict an IAM user or role to creating rules only for events that have a certain value in the `events:details.service` field\. The value of `events:details.service` is not necessarily the name of an AWS service\.
+
+This policy condition is helpful when working with events from AWS Health that relate to security or abuse\. By using this policy condition, you can limit access to these sensitive alerts to only those users who need to see them\.
+
+For example, the following policy allows the creation of rules only for events where the value of `events:details.service` is `ABUSE`\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPutRuleEventsWithDetailServiceEC2",
+            "Effect": "Allow",
+            "Action": "events:PutRule",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "events:detail.service": "ABUSE"
+                }
+            }
+        }
+    ]
+}
+```
+
+## Example 7: Limiting PutRule Access by detail\.eventTypeCode<a name="LimitRuleByTypeCode"></a>
+
+You can restrict an IAM user or role to creating rules only for events that have a certain value in the `events:details.eventTypeCode` field\. This policy condition is helpful when working with events from AWS Health that relate to security or abuse\. By using this policy condition, you can limit access to these sensitive alerts to only those users who need to see them\.
+
+ For example, the following policy allows the creation of rules only for events where the value of `events:details.eventTypeCode` is `AWS_ABUSE_DOS_REPORT`\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPutRuleEventsWithDetailServiceEC2",
+            "Effect": "Allow",
+            "Action": "events:PutRule",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "events:detail.eventTypeCode": "AWS_ABUSE_DOS_REPORT"
+                }
+            }
+        }
+    ]
+}
+```
+
+## Example 8: Ensure That AWS CloudTrail Events for API Calls from a Certain PrincipalId Are Consumed<a name="ConsumeSpecificEvents"></a>
 
 All AWS CloudTrail events have the ID of the user who made the API call \(PrincipalId\) in the `detail.userIdentity.principalId` path of an event\. With the help of the `events:detail.userIdentity.principalId` condition key, you can limit the access of IAM users or roles to the CloudTrail events for only those coming from a specific account\.
 
@@ -271,7 +327,7 @@ See the following table for examples of event patterns that would be allowed or 
 |  <pre>{<br />    "detail-type": [ "AWS API Call via CloudTrail" ],<br />    "detail.userIdentity.principalId": [ "AIDAJ45Q7YFFAREXAMPLE" ]<br />}</pre>  |  Yes  | 
 |  <pre>{<br />    "detail-type": [ "AWS API Call via CloudTrail" ],<br />    "detail.userIdentity.principalId": [ "AROAIDPPEZS35WEXAMPLE:AssumedRoleSessionName" ]<br />}</pre>  |  No  | 
 
-## Example 7: Limiting Access to Targets<a name="LimitingAccessToTargets"></a>
+## Example 9: Limiting Access to Targets<a name="LimitingAccessToTargets"></a>
 
 If an IAM user or role has `events:PutTargets` permission, they can add any target under the same account to the rules that they are allowed to access\. For example, the following policy limits adding targets to only a specific rule \(MyRule under account 123456789012\)\.
 

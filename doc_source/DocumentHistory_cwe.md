@@ -4,6 +4,7 @@ The following table describes important changes in each release of the CloudWatc
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for tagging](#DocumentHistory_cwe) | You can now tag some CloudWatch Events resources\. For more information, see [Tagging Your Amazon CloudWatch Events Resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-Tagging.html) in the *Amazon CloudWatch Events User Guide*\. | March 21, 2019 | 
 | [Support for Amazon VPC endpoints](#DocumentHistory_cwe) | You can now establish a private connection between your VPC and CloudWatch Events\. For more information, see [Using CloudWatch Events with Interface VPC Endpoints](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/cloudwatch-events-and-interface-VPC.html) in the *Amazon CloudWatch Events User Guide*\. | June 28, 2018 | 
 
 The following table describes the important changes to the *Amazon CloudWatch Events User Guide*\.

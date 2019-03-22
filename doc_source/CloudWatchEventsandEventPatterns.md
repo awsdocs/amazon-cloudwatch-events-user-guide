@@ -34,7 +34,8 @@ By default, this is set to 0 \(zero\) in all events\.
 A unique value is generated for every event\. This can be helpful in tracing events as they move through rules to targets, and are processed\.
 
 **detail\-type**  
-Identifies, in combination with the **source** field, the fields and values that appear in the **detail** field\.
+Identifies, in combination with the **source** field, the fields and values that appear in the **detail** field\.  
+All events that are delivered via CloudTrail have `AWS API Call via CloudTrail` as the value for `detail-type`\. For more information, see [Events Delivered Via CloudTrail](EventTypes.md#events-for-services-not-listed)\.
 
 **source**  
 Identifies the service that sourced the event\. All events sourced from within AWS begin with "aws\." Customer\-generated events can have any value here, as long as it doesn't begin with "aws\." We recommend the use of Java package\-name style reverse domain\-name strings\.  

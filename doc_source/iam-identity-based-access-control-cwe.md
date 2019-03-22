@@ -227,6 +227,7 @@ You can use the following sample IAM policies listed to limit the CloudWatch Eve
 + [Example 3: CloudWatchEventsConsoleAccess](#example-policy-cwevents-console-access)
 + [Example 4: CloudWatchEventsFullAccess](#example-policy-cwevents-full-access)
 + [Example 5: CloudWatchEventsReadOnlyAccess](#example-policy-cwevents-readonly-access)
++ [Example 6: Use Tagging to Control Access to Specific Rules](#cwl-IAM-policy-tagging)
 
 ### Example 1: CloudWatchEventsBuiltInTargetExecutionAccess<a name="example-policy-cwevents-builtin-target"></a>
 
@@ -369,3 +370,30 @@ The following policy provides read\-only access to CloudWatch Events\.
     ]
 }
 ```
+
+### Example 6: Use Tagging to Control Access to Specific Rules<a name="cwl-IAM-policy-tagging"></a>
+
+You can grant users access to specified CloudWatch Events rules while preventing them from accessing other rules\. To do so, tag these rules and use IAM policies that refer to those tags\.
+
+For more information about tagging CloudWatch Events resources, see [Tagging Your Amazon CloudWatch Events Resources](CloudWatchEvents-Tagging.md)\.
+
+When you tag CloudWatch Events rules, you can grant an IAM policy to a user to allow access to only the rules with a particular tag\. For example, the following policy statement grants access to only rules with the value of `Prod` for the tag key `Stack`\.
+
+```
+{
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "events:*",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "events:ResourceTag/Stack": "Prod"
+                }
+            }
+        }
+    ]
+}
+```
+
+For more information about using IAM policy statements, see [Controlling Access Using Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html) in the *IAM User Guide*\.

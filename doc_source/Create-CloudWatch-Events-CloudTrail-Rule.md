@@ -4,6 +4,8 @@ To create a rule that triggers on an action by an AWS service that does not emit
 
 Rules in CloudWatch Events work only in the Region in which they are created\. If you configure CloudTrail to track API calls in multiple Regions, and you want a rule based on CloudTrail to trigger in each of those Regions, you must create a separate rule in each Region that you want to track\.
 
+All events that are delivered via CloudTrail have `AWS API Call via CloudTrail` as the value for `detail-type`\.
+
 **Note**  
 In CloudWatch Events, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly\. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state\. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop\.  
 To prevent this, write the rules so that the triggered actions do not re\-fire the same rule\. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change\.   

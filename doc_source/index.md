@@ -1,7 +1,7 @@
 # Amazon CloudWatch Events User Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -49,6 +49,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using Resource-Based Policies for CloudWatch Events](resource-based-policies-cwe.md)
    + [CloudWatch Events Permissions Reference](permissions-reference-cwe.md)
    + [Using IAM Policy Conditions for Fine-Grained Access Control](policy-keys-cwe.md)
++ [Tagging Your Amazon CloudWatch Events Resources](CloudWatchEvents-Tagging.md)
 + [Logging Amazon CloudWatch Events API Calls with AWS CloudTrail](logging_cw_api_calls_cwe.md)
 + [CloudWatch Events Limits](cloudwatch_limits_cwe.md)
 + [Troubleshooting CloudWatch Events](CWE_Troubleshooting.md)

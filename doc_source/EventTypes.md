@@ -1,6 +1,8 @@
 # CloudWatch Events Event Examples From Supported Services<a name="EventTypes"></a>
 
-The following AWS services emit events that can be detected by CloudWatch Events:
+The AWS services in the following list emit events that can be detected by CloudWatch Events\.
+
+Additionally, you can also use CloudWatch Events with services that do not emit events and are not listed on this page, by watching for events delivered via CloudTrail\. For more information, see [Events Delivered Via CloudTrail](#events-for-services-not-listed)\.
 
 **Topics**
 + [AWS Batch Events](#batch_event_type)
@@ -9,11 +11,15 @@ The following AWS services emit events that can be detected by CloudWatch Events
 + [AWS CodeCommit Events](#codecommit_event_type)
 + [AWS CodeDeploy Events](#acd_event_types)
 + [AWS CodePipeline Events](#codepipeline_event_type)
++ [AWS Config Events](#config-event-types)
 + [Amazon EBS Events](#ebs-event-types)
 + [Amazon EC2 Auto Scaling Events](#auto_scaling_event_types)
 + [Amazon EC2 Spot Instance Interruption Events](#spot-instance-event-types)
 + [Amazon EC2 State Change Events](#ec2_event_type)
 + [Amazon ECS Events](#ecs-event-types)
++ [AWS Elemental MediaConvert Events](#emc-event-types)
++ [AWS Elemental MediaPackage Events](#emp-event-types)
++ [AWS Elemental MediaStore Events](#ems-event-types)
 + [Amazon EMR Events](#emr_event_type)
 + [Amazon GameLift Event](#gamelift-event-types)
 + [AWS Glue Events](#glue-event-types)
@@ -23,6 +29,7 @@ The following AWS services emit events that can be detected by CloudWatch Events
 + [Amazon Macie Events](#macie-event-types)
 + [AWS Management Console Sign\-in Events](#console_event_type)
 + [AWS OpsWorks Stacks Events](#opsworks_event_types)
++ [Amazon SageMaker Events](#sagemaker_event_types)
 + [AWS Server Migration Service Events](#server-migration-service-event-types)
 + [AWS Systems Manager Events](#ssm_event_types)
 + [AWS Systems Manager Configuration Compliance Events](#SSM-Configuration-Compliance-event-types)
@@ -31,7 +38,7 @@ The following AWS services emit events that can be detected by CloudWatch Events
 + [Tag Change Events on AWS Resources](#tag-event-types)
 + [AWS Trusted Advisor Events](#trusted-advisor-event-types)
 + [Amazon WorkSpaces Events](#workspaces-event-types)
-+ [Events for Services Not Listed](#events-for-services-not-listed)
++ [Events Delivered Via CloudTrail](#events-for-services-not-listed)
 
 ## AWS Batch Events<a name="batch_event_type"></a>
 
@@ -256,6 +263,8 @@ The following are examples of events for AWS CodePipeline\.
 
 **Action Execution State Change**
 
+In this sample, there are two `region` fields\. The one at the top is the name of the AWS Region where the action in the target pipeline is executed\. In this example, this is `us-east-1`\. The `region` in the `detail` section is the AWS Region where the event was created\. This is the same as the Region where the pipeline was created\. In this example, this is `us-west-2`\.
+
 ```
 {
   "version": "0",
@@ -275,6 +284,7 @@ The following are examples of events for AWS CodePipeline\.
     "stage": "Prod",
     "action": "myAction",
     "state": "STARTED",
+    "region":"us-west-2",
     "type": {
       "owner": "AWS",
       "category": "Deploy",
@@ -284,6 +294,10 @@ The following are examples of events for AWS CodePipeline\.
   }
 }
 ```
+
+## AWS Config Events<a name="config-event-types"></a>
+
+For information about the AWS Config events, see [Monitoring AWS Config with Amazon CloudWatch Events](https://docs.aws.amazon.com/config/latest/developerguide/monitor-config-with-cloudwatchevents.html) in the *AWS Config Developer Guide*\.
 
 ## Amazon EBS Events<a name="ebs-event-types"></a>
 
@@ -326,6 +340,18 @@ This example is for an instance in the `pending` state\. The other possible valu
 ## Amazon ECS Events<a name="ecs-event-types"></a>
 
 For Amazon ECS sample events, see [Amazon ECS Events](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwe_events.html) in the *Amazon Elastic Container Service Developer Guide*\.
+
+## AWS Elemental MediaConvert Events<a name="emc-event-types"></a>
+
+For MediaConvert sample events, see [Using CloudWatch Events to Monitor AWS Elemental MediaConvert Jobs](https://docs.aws.amazon.com/mediaconvert/latest/ug/cloudwatch_events.html) in the *AWS Elemental MediaConvert User Guide*\.
+
+## AWS Elemental MediaPackage Events<a name="emp-event-types"></a>
+
+For MediaPackage sample events, see [Monitoring AWS Elemental MediaPackage with Amazon CloudWatch Events](https://docs.aws.amazon.com/mediapackage/latest/ug/monitoring-cloudwatch-events.html) in the *AWS Elemental MediaPackage User Guide*\.
+
+## AWS Elemental MediaStore Events<a name="ems-event-types"></a>
+
+For MediaStore sample events, see [Automating AWS Elemental MediaStore with CloudWatch Events](https://docs.aws.amazon.com/mediastore/latest/ug/monitoring-automating-with-cloudwatch-events.html) in the *AWS Elemental MediaStore User Guide*\.
 
 ## Amazon EMR Events<a name="emr_event_type"></a>
 
@@ -1171,6 +1197,58 @@ The following is the format for AWS Glue events\.
 }
 ```
 
+**AWS Glue Data Catalog Table State Change**
+
+```
+{
+    "version": "0",
+    "id": "2617428d-715f-edef-70b8-d210da0317a0",
+    "detail-type": "Glue Data Catalog Table State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2019-01-16T18:16:01Z",
+    "region": "eu-west-1",
+    "resources": [
+        "arn:aws:glue:eu-west-1:123456789012:table/d1/t1"
+    ],
+    "detail": {
+        "databaseName": "d1",
+        "changedPartitions": [
+            "[C.pdf, dir3]",
+            "[D.doc, dir4]"
+        ],
+        "typeOfChange": "BatchCreatePartition",
+        "tableName": "t1"
+    }
+}
+```
+
+**AWS Glue Data Catalog Database State Change**
+
+In the following example, the `typeofChange` is `CreateTable`\. Other possible values for this field are `CreateDatabase` and `UpdateTable`\.
+
+```
+{
+    "version": "0",
+    "id": "60e7ddc2-a588-5328-220a-21c060f6c3f4",
+    "detail-type": "Glue Data Catalog Database State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2019-01-16T18:08:48Z",
+    "region": "eu-west-1",
+    "resources": [
+        "arn:aws:glue:eu-west-1:123456789012:table/d1/t1"
+    ],
+    "detail": {
+        "databaseName": "d1",
+        "typeOfChange": "CreateTable",
+        "changedTables": [
+            "t1"
+        ]
+    }
+}
+```
+
 ## Amazon GuardDuty Events<a name="guardduty-event-types"></a>
 
 For information about example Amazon GuardDuty events, see [Monitoring Amazon GuardDuty with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug//guardduty_findings_cloudwatch.html) in the *Amazon GuardDuty User Guide*\.
@@ -1817,6 +1895,235 @@ An AWS OpsWorks Stacks service error was raised\.
     "type": "InstanceStop",
     "message": "The shutdown of the instance timed out. Please try stopping it again."
   }
+}
+```
+
+## Amazon SageMaker Events<a name="sagemaker_event_types"></a>
+
+The following are examples of Amazon SageMaker events\.
+
+**Amazon SageMaker training job state change**
+
+Indicates a change in the status of an Amazon SageMaker training job\.
+
+If the value of `TrainingJobStatus` is `Failed`, the event contains the `FailureReason` field, which provides a description of why the training job failed\. 
+
+```
+{
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "SageMaker Training Job State Change",
+    "source": "aws.sagemaker",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+        "arn:aws:sagemaker:us-east-1:123456789012:training-job/kmeans-1"
+    ],
+    "detail": {
+        "TrainingJobName": "89c96cc8-dded-4739-afcc-6f1dc936701d",
+        "TrainingJobArn": "arn:aws:sagemaker:us-east-1:123456789012:training-job/kmeans-1",
+        "TrainingJobStatus": "Completed",
+        "SecondaryStatus": "Completed",
+        "HyperParameters": {
+            "Hyper": "Parameters"
+        },
+        "AlgorithmSpecification": {
+            "TrainingImage": "TrainingImage",
+            "TrainingInputMode": "TrainingInputMode"
+        },
+        "RoleArn": "a little teapot, some little teapot",
+        "InputDataConfig": [
+            {
+                "ChannelName": "Train",
+                "DataSource": {
+                    "S3DataSource": {
+                        "S3DataType": "S3DataType",
+                        "S3Uri": "S3Uri",
+                        "S3DataDistributionType": "S3DataDistributionType"
+                    }
+                },
+                "ContentType": "ContentType",
+                "CompressionType": "CompressionType",
+                "RecordWrapperType": "RecordWrapperType"
+            }
+        ],
+        "OutputDataConfig": {
+            "KmsKeyId": "KmsKeyId",
+            "S3OutputPath": "S3OutputPath"
+        },
+        "ResourceConfig": {
+            "InstanceType": "InstanceType",
+            "InstanceCount": 3,
+            "VolumeSizeInGB": 20,
+            "VolumeKmsKeyId": "VolumeKmsKeyId"
+        },
+        "VpcConfig": {
+            
+        },
+        "StoppingCondition": {
+            "MaxRuntimeInSeconds": 60
+        },
+        "CreationTime": "2018-10-06T12:26:13Z",
+        "TrainingStartTime": "2018-10-06T12:26:13Z",
+        "TrainingEndTime": "2018-10-06T12:26:13Z",
+        "LastModifiedTime": "2018-10-06T12:26:13Z",
+        "SecondaryStatusTransitions": [
+            
+        ],
+        "Tags": {
+            
+        }
+    }
+}
+```
+
+**Amazon SageMaker HyperParameter tuning job state change**
+
+Indicates a change in the status of an Amazon SageMaker hyperparameter tuning job\.
+
+```
+{
+  "version": "0",
+  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+  "detail-type": "SageMaker HyperParameter Tuning Job State Change",
+  "source": "aws.sagemaker",
+  "account": "123456789012",
+  "time": "2018-10-06T12:26:13Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:sagemaker:us-east-1:123456789012:tuningJob/x"
+  ],
+  "detail": {
+    "HyperParameterTuningJobName": "016bffd3-6d71-4d3a-9710-0a332b2759fc",
+    "HyperParameterTuningJobArn": "arn:aws:sagemaker:us-east-1:123456789012:tuningJob/x",
+    "TrainingJobDefinition": {
+      "StaticHyperParameters": {},
+      "AlgorithmSpecification": {
+        "TrainingImage": "trainingImageName",
+        "TrainingInputMode": "inputModeFile",
+        "MetricDefinitions": [
+          {
+            "Name": "metricName",
+            "Regex": "regex"
+          }
+        ]
+      },
+      "RoleArn": "roleArn",
+      "InputDataConfig": [
+        {
+          "ChannelName": "channelName",
+          "DataSource": {
+            "S3DataSource": {
+              "S3DataType": "s3DataType",
+              "S3Uri": "s3Uri",
+              "S3DataDistributionType": "s3DistributionType"
+            }
+          },
+          "ContentType": "contentType",
+          "CompressionType": "gz",
+          "RecordWrapperType": "RecordWrapper"
+        }
+      ],
+      "VpcConfig": {
+        "SecurityGroupIds": [
+          "securityGroupIds"
+        ],
+        "Subnets": [
+          "subnets"
+        ]
+      },
+      "OutputDataConfig": {
+        "KmsKeyId": "kmsKeyId",
+        "S3OutputPath": "s3OutputPath"
+      },
+      "ResourceConfig": {
+        "InstanceType": "instanceType",
+        "InstanceCount": 10,
+        "VolumeSizeInGB": 500,
+        "VolumeKmsKeyId": "volumeKeyId"
+      },
+      "StoppingCondition": {
+        "MaxRuntimeInSeconds": 3600
+      }
+    },
+    "HyperParameterTuningJobStatus": "status",
+    "CreationTime": "2018-10-06T12:26:13Z",
+    "LastModifiedTime": "2018-10-06T12:26:13Z",
+    "TrainingJobStatusCounters": {
+      "Completed": 1,
+      "InProgress": 0,
+      "RetryableError": 0,
+      "NonRetryableError": 0,
+      "Stopped": 0
+    },
+    "ObjectiveStatusCounters": {
+      "Succeeded": 1,
+      "Pending": 0,
+      "Failed": 0
+    },
+    "Tags": {}
+  }
+}
+```
+
+**Amazon SageMaker transform job state change**
+
+Indicates a change in the state of an Amazon SageMaker batch transform job\.
+
+If the value of `TransformJobStatus` is `Failed`, the event contains the `FailureReason` field, which provides a description of why the training job failed\. 
+
+```
+{
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "SageMaker Transform Job State Change",
+    "source": "aws.sagemaker",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+        "arn:aws:sagemaker:us-east-1:123456789012:transform-job/myjob"
+    ],
+    "detail": {
+        "TransformJobName": "4b52bd8f-e034-4345-818d-884bdd7c9724",
+        "TransformJobArn": "arn:aws:sagemaker:us-east-1:123456789012:transform-job/myjob",
+        "TransformJobStatus": "Completed",
+        "ModelName": "ModelName",
+        "MaxConcurrentTransforms": 5,
+        "MaxPayloadInMB": 10,
+        "BatchStrategy": "Strategy",
+        "Environment": {
+            "environment1": "environment2"
+        },
+        "TransformInput": {
+            "DataSource": {
+                "S3DataSource": {
+                    "S3DataType": "s3DataType",
+                    "S3Uri": "s3Uri"
+                }
+            },
+            "ContentType": "content type",
+            "CompressionType": "compression type",
+            "SplitType": "split type"
+        },
+        "TransformOutput": {
+            "S3OutputPath": "s3Uri",
+            "Accept": "accept",
+            "AssembleWith": "assemblyType",
+            "KmsKeyId": "kmsKeyId"
+        },
+        "TransformResources": {
+            "InstanceType": "instanceType",
+            "InstanceCount": 3
+        },
+        "CreationTime": "2018-10-06T12:26:13Z",
+        "TransformStartTime": "2018-10-06T12:26:13Z",
+        "TransformEndTime": "2018-10-06T12:26:13Z",
+        "Tags": {
+            
+        }
+    }
 }
 ```
 
@@ -2502,11 +2809,15 @@ The following are examples of the events for AWS Trusted Advisor\. For more info
 
 For information about the Amazon WorkSpaces events, see [Monitor Your WorkSpaces Using CloudWatch Events](https://docs.aws.amazon.com/workspaces/latest/adminguide/cloudwatch-events.html) in the *Amazon WorkSpaces Administration Guide*\.
 
-## Events for Services Not Listed<a name="events-for-services-not-listed"></a>
+## Events Delivered Via CloudTrail<a name="events-for-services-not-listed"></a>
 
 You can also use CloudWatch Events with services that do not emit events and are not listed on this page\. AWS CloudTrail is a service that automatically records events such as AWS API calls\. You can create CloudWatch Events rules that trigger on the information captured by CloudTrail\. For more information about CloudTrail, see [What is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)\. For more information about creating a CloudWatch Events rule that uses CloudTrail, see [Creating a CloudWatch Events Rule That Triggers on an AWS API Call Using AWS CloudTrail](Create-CloudWatch-Events-CloudTrail-Rule.md)\.
 
-The following is an example of an AWS API call event to Amazon S3 to create a bucket:
+All events that are delivered via CloudTrail have `AWS API Call via CloudTrail` as the value for `detail-type`\. 
+
+Some occurrences in AWS can be reported to CloudWatch Events both by the service itself and by CloudTrail, but in different ways\. For example, an Amazon EC2 API call that launches or terminates an instance generates events available to CloudWatch Events through CloudTrail\. However, the Amazon EC2 instance state changes, from ‘running’ to ‘terminating’ for example, are CloudWatch Events events themselves\.
+
+The following is an example of an event delivered via CloudTrail\. The event was generated by an AWS API call to Amazon S3 to create a bucket\.
 
 ```
 {
@@ -2550,6 +2861,7 @@ The following is an example of an AWS API call event to Amazon S3 to create a bu
 ```
 
 Only the read/write events from the following services are supported\. Read\-only operations—such as those that begin with **List**, **Get**, or **Describe**—aren't supported\. In addition, AWS API call events that are larger than 256 KB in size are not supported\.
++ Amazon API Gateway
 + Amazon EC2 Auto Scaling
 + AWS Certificate Manager
 + AWS CloudFormation
@@ -2583,7 +2895,7 @@ Only the read/write events from the following services are supported\. Read\-onl
 + Amazon Elastic Transcoder
 + Amazon Elasticsearch Service
 + Amazon GameLift
-+ Amazon Glacier
++ Amazon S3 Glacier
 + AWS Identity and Access Management \[US East \(N\. Virginia\) only\]
 + Amazon Inspector
 + AWS IoT

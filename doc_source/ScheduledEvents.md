@@ -2,9 +2,10 @@
 
 You can create rules that self\-trigger on an automated schedule in CloudWatch Events using cron or rate expressions\. All scheduled events use UTC time zone and the minimum precision for schedules is 1 minute\.
 
-CloudWatch Events does not provide second\-level precision in schedule expressions\. The finest resolution using a cron expression is a minute\. Due to the distributed nature of the CloudWatch Events and the target services, the delay between the time the scheduled rule is triggered and the time the target service honors the execution of the target resource might be several seconds\. Your scheduled rule is triggered within that minute, but not on the precise 0th second\.
+CloudWatch Events supports cron expressions and rate expressions\. Rate expressions are simpler to define but don't offer the fine\-grained schedule control that cron expressions support\. For example, with a cron expression, you can define a rule that triggers at a specified time on a certain day of each week or month\. In contrast, rate expressions trigger a rule at a regular rate, such as once every hour or once every day\.
 
-CloudWatch Events supports the following formats for schedule expressions\.
+**Note**  
+CloudWatch Events does not provide second\-level precision in schedule expressions\. The finest resolution using a cron expression is a minute\. Due to the distributed nature of the CloudWatch Events and the target services, the delay between the time the scheduled rule is triggered and the time the target service honors the execution of the target resource might be several seconds\. Your scheduled rule is triggered within that minute, but not on the precise 0th second\.
 
 **Topics**
 + [Cron Expressions](#CronExpressions)
@@ -33,7 +34,7 @@ cron(fields)
 **Wildcards**
 + The **,** \(comma\) wildcard includes additional values\. In the Month field, JAN,FEB,MAR would include January, February, and March\.
 + The **\-** \(dash\) wildcard specifies ranges\. In the Day field, 1\-15 would include days 1 through 15 of the specified month\.
-+ The **\*** \(asterisk\) wildcard includes all values in the field\. In the Hours field, **\*** would include every hour\.
++ The **\*** \(asterisk\) wildcard includes all values in the field\. In the Hours field, **\*** would include every hour\. You cannot use **\*** in both the Day\-of\-month and Day\-of\-week fields\. If you use it in one, you must use **?** in the other\.
 + The **/** \(forward slash\) wildcard specifies increments\. In the Minutes field, you could enter 1/10 to specify every tenth minute, starting from the first minute of the hour \(for example, the 11th, 21st, and 31st minute, and so on\)\.
 + The **?** \(question mark\) wildcard specifies one or another\. In the Day\-of\-month field you could enter **7** and if you didn't care what day of the week the 7th was, you could enter **?** in the Day\-of\-week field\.
 + The **L** wildcard in the Day\-of\-month or Day\-of\-week fields specifies the last day of the month or week\.
@@ -99,7 +100,7 @@ Valid values: minute \| minutes \| hour \| hours \| day \| days
 If the value is equal to 1, then the unit must be singular\. Similarly, for values greater than 1, the unit must be plural\. For example, rate\(1 hours\) and rate\(5 hour\) are not valid, but rate\(1 hour\) and rate\(5 hours\) are valid\.
 
 **Examples**  
-The following examples show how to use rate expressions with the AWS CLI [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\.
+The following examples show how to use rate expressions with the AWS CLI [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\. The first example triggers the rule every 5 minutes, the next triggers it once an hour, and the third example triggers it once a day\.
 
 ```
 aws events put-rule --schedule-expression "rate(5 minutes)" --name MyRule3
