@@ -1,8 +1,8 @@
-# Tutorial: Schedule Automated Builds Using AWS CodeBuild<a name="CloudWatch-Events-tutorial-codebuild"></a>
+# Tutorial: Schedule Automated Builds Using CodeBuild<a name="CloudWatch-Events-tutorial-codebuild"></a>
 
-In the example in this tutorial, you schedule AWS CodeBuild to run a build every week night at 8PM GMT\. You also pass a constant to AWS CodeBuild to be used for this scheduled build\.
+In the example in this tutorial, you schedule CodeBuild to run a build every week night at 8PM GMT\. You also pass a constant to CodeBuild to be used for this scheduled build\.
 
-**To create a rule scheduling an AWS CodeBuild project build nightly at 8PM**
+**To create a rule scheduling an CodeBuild project build nightly at 8PM**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
@@ -18,7 +18,7 @@ In the example in this tutorial, you schedule AWS CodeBuild to run a build every
 
 1. For **Project ARN**, type the ARN of the build project\.
 
-1. In this tutorial, we add the optional step of passing a parameter to AWS CodeBuild, to override the default\. This is not required when you set AWS CodeBuild as the target\. To pass the parameter, choose **Configure input**, **Constant \(JSON text\)**\.
+1. In this tutorial, we add the optional step of passing a parameter to CodeBuild, to override the default\. This is not required when you set CodeBuild as the target\. To pass the parameter, choose **Configure input**, **Constant \(JSON text\)**\.
 
    In the box under **Constant \(JSON text\)**, type the following to set the timeout override to 30 minutes for these scheduled builds: **\{ "timeoutInMinutesOverride": 30 \}**
 

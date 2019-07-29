@@ -7,10 +7,10 @@ Additionally, you can also use CloudWatch Events with services that do not emit 
 **Topics**
 + [AWS Batch Events](#batch_event_type)
 + [Amazon CloudWatch Events Scheduled Events](#schedule_event_type)
-+ [AWS CodeBuild Events](#codebuild_event_type)
-+ [AWS CodeCommit Events](#codecommit_event_type)
++ [CodeBuild Events](#codebuild_event_type)
++ [CodeCommit Events](#codecommit_event_type)
 + [AWS CodeDeploy Events](#acd_event_types)
-+ [AWS CodePipeline Events](#codepipeline_event_type)
++ [CodePipeline Events](#codepipeline_event_type)
 + [AWS Config Events](#config-event-types)
 + [Amazon EBS Events](#ebs-event-types)
 + [Amazon EC2 Auto Scaling Events](#auto_scaling_event_types)
@@ -23,6 +23,7 @@ Additionally, you can also use CloudWatch Events with services that do not emit 
 + [Amazon EMR Events](#emr_event_type)
 + [Amazon GameLift Event](#gamelift-event-types)
 + [AWS Glue Events](#glue-event-types)
++ [AWS Ground Station Events](#ground_station-event-types)
 + [Amazon GuardDuty Events](#guardduty-event-types)
 + [AWS Health Events](#health-event-types)
 + [AWS KMS Events](#kms-event-types)
@@ -30,11 +31,13 @@ Additionally, you can also use CloudWatch Events with services that do not emit 
 + [AWS Management Console Sign\-in Events](#console_event_type)
 + [AWS OpsWorks Stacks Events](#opsworks_event_types)
 + [Amazon SageMaker Events](#sagemaker_event_types)
++ [AWS Security Hub Events](#securityhub-event-types)
 + [AWS Server Migration Service Events](#server-migration-service-event-types)
 + [AWS Systems Manager Events](#ssm_event_types)
 + [AWS Systems Manager Configuration Compliance Events](#SSM-Configuration-Compliance-event-types)
 + [AWS Systems Manager Maintenance Windows Events](#EC2_maintenance_windows_event_types)
 + [AWS Systems Manager Parameter Store Events](#SSM-Parameter-Store-event-types)
++ [AWS Step Functions Events](#stepfunctions_event_type)
 + [Tag Change Events on AWS Resources](#tag-event-types)
 + [AWS Trusted Advisor Events](#trusted-advisor-event-types)
 + [Amazon WorkSpaces Events](#workspaces-event-types)
@@ -61,64 +64,70 @@ The following is an example of a scheduled event:
 }
 ```
 
-## AWS CodeBuild Events<a name="codebuild_event_type"></a>
+## CodeBuild Events<a name="codebuild_event_type"></a>
 
-For AWS CodeBuild sample events, see [Build Notifications Input Format Reference](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-build-notifications.html#sample-build-notifications-ref) in the *AWS CodeBuild User Guide*\.
+For CodeBuild sample events, see [Build Notifications Input Format Reference](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-build-notifications.html#sample-build-notifications-ref) in the *AWS CodeBuild User Guide*\.
 
-## AWS CodeCommit Events<a name="codecommit_event_type"></a>
+## CodeCommit Events<a name="codecommit_event_type"></a>
 
-The following are examples of events for AWS CodeCommit\.
+The following are examples of events for CodeCommit\.
 
 **referenceCreated event**
 
 ```
 {
-      "version": "0",
-      "id": "01234567-0123-0123-0123-012345678901",
-      "detail-type": "CodeCommit Repository State Change",
-      "source": "aws.codecommit",
-      "account": "123456789012",
-      "time": "2017-06-12T10:23:43Z",
-      "region": "us-east-1",
-      "resources": [
-        "arn:aws:codecommit:us-east-1:123456789012:myRepo"
-      ],
-      "detail": {
-        "event": "referenceCreated",
-        "repositoryName": "myRepo",
-        "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
-        "referenceType": "tag",
-        "referenceName": "myTag",
-        "referenceFullName": "refs/tags/myTag",
-        "commitId": "3e5983EXAMPLE"
-      }
- }
+   "version": "0",
+   "id": "01234567-0123-0123-0123-012345678901",
+   "detail-type": "CodeCommit Repository State Change",
+   "source": "aws.codecommit",
+   "account": "123456789012",
+   "time": "2017-06-12T10:23:43Z",
+   "region": "us-east-1",
+   "resources": [
+     "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+   ],
+   "detail": {
+     "event": "referenceCreated",
+     "repositoryName": "myRepo",
+     "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
+     "referenceType": "branch",
+     "referenceName": "myBranch",
+     "referenceFullName": "refs/heads/myBranch",
+     "commitId": "3e5983DESTINATION"
+   }
+}
 ```
 
 **referenceUpdated event**
 
 ```
 {
-      "version": "0",
-      "id": "01234567-0123-0123-0123-012345678901",
-      "detail-type": "CodeCommit Repository State Change",
-      "source": "aws.codecommit",
-      "account": "123456789012",
-      "time": "2017-06-12T10:23:43Z",
-      "region": "us-east-1",
-      "resources": [
-        "arn:aws:codecommit:us-east-1:123456789012:myRepo"
-      ],
-      "detail": {
-        "event": "referenceUpdated",
-        "repositoryName": "myRepo",
-        "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
-        "referenceType": "branch",
-        "referenceName": "myBranch",
-        "referenceFullName": "refs/heads/myBranch",
-        "commitId": "26a8f2EXAMPLE",
-        "oldCommitId": "3e5983EXAMPLE"
-      }
+   "version": "0",
+   "id": "01234567-0123-0123-0123-012345678901",
+   "detail-type": "CodeCommit Repository State Change",
+   "source": "aws.codecommit",
+   "account": "123456789012",
+   "time": "2017-06-12T10:23:43Z",
+   "region": "us-east-1",
+   "resources": [
+     "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+   ],
+   "detail": {
+     "event": "referenceUpdated",
+     "repositoryName": "myRepo",
+     "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
+     "referenceType": "branch",
+     "referenceName": "myBranch",
+     "referenceFullName": "refs/heads/myBranch",
+     "commitId": "7f0103fMERGE",
+     "oldCommitId": "3e5983DESTINATION",
+     "baseCommitId": "3e5a9bf1BASE",
+     "sourceCommitId": "26a8f2SOURCE",
+     "destinationCommitId": "3e5983DESTINATION",
+     "mergeOption": "THREE_WAY_MERGE",
+     "conflictDetailsLevel": "LINE_LEVEL",
+     "conflictResolutionStrategy": "AUTOMERGE"
+   }
 }
 ```
 
@@ -126,31 +135,315 @@ The following are examples of events for AWS CodeCommit\.
 
 ```
 {
-     "version": "0",
-      "id": "01234567-0123-0123-0123-012345678901",
-      "detail-type": "CodeCommit Repository State Change",
-      "source": "aws.codecommit",
-      "account": "123456789012",
-      "time": "2017-06-12T10:23:43Z",
-      "region": "us-east-1",
-      "resources": [
-        "arn:aws:codecommit:us-east-1:123456789012:myRepo"
-      ],
-      "detail": {
-        "event": "referenceDeleted",
-        "repositoryName": "myRepo",
-        "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
-        "referenceType": "branch",
-        "referenceName": "myBranch",
-        "referenceFullName": "refs/heads/myBranch",
-        "oldCommitId": "26a8f2EXAMPLE"
-      }
+  "version": "0",
+  "id": "01234567-0123-0123-0123-012345678901",
+  "detail-type": "CodeCommit Repository State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2017-06-12T10:23:43Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+  ],
+  "detail": {
+    "event": "referenceDeleted",
+    "repositoryName": "myRepo",
+    "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
+    "referenceType": "branch",
+    "referenceName": "myBranch",
+    "referenceFullName": "refs/heads/myBranch",
+    "oldCommitId": "26a8f2EXAMPLE"
+  }
+}
+```
+
+**unreferencedMergeCommitCreated event**
+
+```
+{
+  "version": "0",
+  "id": "01234567-0123-0123-0123-012345678901",
+  "detail-type": "CodeCommit Repository State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2017-06-12T10:23:43Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+  ],
+  "detail": {
+    "event": "unreferencedMergeCommitCreated",
+    "repositoryName": "myRepo",
+    "repositoryId": "12345678-1234-5678-abcd-12345678abcd"
+    "commitId": "7f0103fMERGE",
+    "baseCommitId": "3e5a9bf1BASE",
+    "sourceCommitId": "26a8f2SOURCE",
+    "destinationCommitId": "3e5983DESTINATION",
+    "mergeOption": "SQUASH_MERGE",
+    "conflictDetailsLevel": "LINE_LEVEL",
+    "conflictResolutionStrategy": "AUTOMERGE"
+  }
+}
+```
+
+**commentOnCommitCreated event**
+
+```
+{
+  "version": "0",
+  "id": "e9dce2e9-5f82-f674-c9c7-6319dac92cc1",
+  "detail-type": "CodeCommit Comment on Commit",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2017-09-29T20:20:39Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "beforeCommitId": "3c5dEXAMPLE0000000000000000000000000000",
+    "repositoryId": "7dd1EXAMPLE...",
+    "inReplyTo": "695bEXAMPLE...",
+    "notificationBody": "An event occurred in the following repository: my-new-repository. arn:aws:iam::0123EXAMPLE0:user/codecommituser made a comment. The comment was made on the following comment ID: 463bEXAMPLE.... For more information, go to the AWS CodeCommit console at https://us-east-1.console.aws.amazon.com/codecommit/home?region=us-east-1#/repository/my-new-repository/compare/3c5dEXAMPLE00000000000000000000000000000...f4d5EXAMPLE000000000000000000000000#463bEXAMPLE....",
+    "commentId": "463bEXAMPLE...",
+    "afterCommitId": "f4d5EXAMPLE000000000000000000000000000",
+    "event": "commentOnCommitCreated",
+    "repositoryName": "my-new-repository",
+    "callerUserArn": "arn:aws:iam::0123EXAMPLE0:user/codecommituser"
+  }
+}
+```
+
+**commentOnCommitUpdated event**
+
+```
+{
+  "version": "0",
+  "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+  "detail-type": "CodeCommit Comment on Commit",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2018-02-09T07:15:16Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "afterCommitId": "1234567890293783361471680277136017291",
+    "beforeCommitId": "01234567896178429589969823096709582257",
+    "callerUserArn": "arn:aws:sts::123456789012:assumed-role/Admin/user",
+    "commentId": "a7e5471e-8600-4bc4-b8cc-f3234b8b6209:46dde340-5f6f-44a2-8fe6-b2e368a9d3ae",
+    "event": "commentOnCommitUpdated",
+    "inReplyTo": "bdb07d47-6fe9-47b0-a839-b93cc743b2ac:468cd1cb-2dfb-4f68-9636-8de52431d1d6",
+    "notificationBody": "A comment event occurred in the following AWS CodeCommit repository: myRepo. arn:aws:sts::123456789012:assumed-role/Admin/user updated a comment or replied to a comment. The comment was made on the following comment ID: bdb07d47-6fe9-47b0-a839-b93cc743b2ac:468cd1cb-2dfb-4f68-9636-8de52431d1d6. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/myRepo/compare/0331444646178429589969823096709582251768/.../5381258150293783361471680277136017291382?region\u003dus-east-1",
+    "repositoryId": "12345678-1234-1234-1234-123456789012",
+    "repositoryName": "myRepo"
+  }
+}
+```
+
+**commentOnPullRequestCreated event**
+
+```
+{
+  "version": "0",
+  "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+  "detail-type": "CodeCommit Comment on Pull Request",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2018-02-09T07:15:16Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "beforeCommitId": "3c5dEXAMPLE0000000000000000000000000000",
+    "repositoryId": "7dd1EXAMPLE...",
+    "inReplyTo": "695bEXAMPLE...",
+    "notificationBody": "An event occurred in the following repository: my-new-repository. arn:aws:iam::0123EXAMPLE0:user/codecommituser made a comment. The comment was made on the following Pull Request: 201. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codecommit/home?region=us-east-1#/repository/my-new-repository/pull-request/201/activity#3276EXAMPLE...",
+    "commentId": "463bEXAMPLE...",
+    "afterCommitId": "f4d5EXAMPLE00000000000000000000000000",
+    "event": "commentOnPullRequestCreated",
+    "repositoryName": "my-new-repository",
+    "callerUserArn": "arn:aws:iam::123456789012:user/codecommituser",
+    "pullRequestId": "201"
+  }
+}
+```
+
+**commentOnPullRequestUpdated event**
+
+```
+{
+  "version": "0",
+  "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+  "detail-type": "CodeCommit Comment on Pull Request",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2018-02-09T07:15:16Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "afterCommitId": "1234567890293783361471680277136017291",
+    "beforeCommitId": "01234567896178429589969823096709582257",
+    "callerUserArn": "arn:aws:sts::123456789012:assumed-role/Admin/user",
+    "commentId": "40cb52f0-aac7-4c43-b771-601eff02ea61:285e1fe5-b337-40f3-afca-7b131a65312f",
+    "event": "commentOnPullRequestUpdated",
+    "inReplyTo": "1285e713-b8e9-4bac-83fd-a685f76a7845:0bde4dd9-5fa9-4856-8c77-65d32dac9079",
+    "notificationBody": "myRepoll request event occurred in the following AWS CodeCommit repository: myRepo. arn:aws:sts::123456789012:assumed-role/Admin/user updated a comment or replied to a comment. The comment was made on the following Pull Request: 1. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/myRepo/pull-requests/1/activity#40cb52f0-aac7-4c43-b771-601eff02ea61%3A285e1fe5-b337-40f3-afca-7b131a65312f?region\u003dus-east-1",
+    "pullRequestId": "1",
+    "repositoryId": "12345678-1234-1234-1234-123456789012",
+    "repositoryName": "myRepo"
+  }
+}
+```
+
+**pullRequestCreated event**
+
+```
+{
+  "version": "0",
+  "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+  "detail-type": "CodeCommit Pull Request State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2018-02-09T07:15:16Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "author": "author",
+    "callerUserArn": "arn:aws:sts::123456789012:assumed-role/Admin/user",
+    "creationDate": "Tue Jun 18 10:18:42 PDT 2019",
+    "description": "example description",
+    "destinationCommit": "12241970655145931562938821759265969907",
+    "destinationReference": "master",
+    "event": "pullRequestCreated",
+    "isMerged": "False",
+    "lastModifiedDate": "Tue Jun 18 10:18:42 PDT 2019",
+    "notificationBody": "A pull request event occurred in the following AWS CodeCommit repository: myRepo. arn:aws:sts::123456789012:assumed-role/Admin/user made the following PullRequest 1. The pull request was created with the following information: Pull Request ID as 1 and title as example title. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/myRepo/pull-requests/1?region\u003dus-east-1",
+    "pullRequestId": "1",
+    "pullRequestStatus": "Open",
+    "repositoryNames": ["myRepo"],
+    "sourceCommit": "27742901703401355655912545615734404050",
+    "sourceReference": "branch1",
+    "title": "example title"
+  }
+}
+```
+
+**pullRequestSourceBranchUpdated event**
+
+```
+{
+  "version": "0",
+  "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+  "detail-type": "CodeCommit Pull Request State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2018-02-09T07:15:16Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "author": "author",
+    "callerUserArn": "arn:aws:sts::123456789012:assumed-role/Admin/user",
+    "creationDate": "Tue Jun 18 10:31:31 PDT 2019",
+    "description": "example description",
+    "destinationCommit": "76449902992086345866564230250402189095",
+    "destinationReference": "master",
+    "event": "pullRequestSourceBranchUpdated",
+    "isMerged": "False",
+    "lastModifiedDate": "Tue Jun 18 10:31:31 PDT 2019",
+    "notificationBody": "A pull request event occurred in the following AWS CodeCommit repository: myRepo. arn:aws:sts::123456789012:assumed-role/Admin/user updated the following PullRequest 1. The pull request was updated with one or more commits to the source branch: branch1. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/myRepo/pull-requests/1?region\u003dus-east-1",
+    "pullRequestId": "1",
+    "pullRequestStatus": "Open",
+    "repositoryNames": ["myRepo"],
+    "sourceCommit": "64875001337214370214600519120836020578",
+    "sourceReference": "branch1",
+    "title": "example title"
+  }
+}
+```
+
+**pullRequestStatusChanged event**
+
+```
+{
+  "version": "0",
+  "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+  "detail-type": "CodeCommit Pull Request State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2018-02-09T07:15:16Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+  ],
+  "detail": {
+    "author": "author",
+    "callerUserArn": "arn:aws:sts::123456789012:assumed-role/Admin/user",
+    "creationDate": "Tue Jun 18 10:34:20 PDT 2019",
+    "description": "example description",
+    "destinationCommit": "95149731480593298918526415709142628597",
+    "destinationReference": "master",
+    "event": "pullRequestStatusChanged",
+    "isMerged": "False",
+    "lastModifiedDate": "Tue Jun 18 10:34:20 PDT 2019",
+    "notificationBody": "A pull request event occurred in the following AWS CodeCommit repository: myRepo. arn:aws:sts::123456789012:assumed-role/Admin/user updated the following PullRequest 1. The pull request status has been updated. The status is closed. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/myRepo/pull-requests/1?region\u003dus-east-1",
+    "pullRequestId": "1",
+    "pullRequestStatus": "Closed",
+    "repositoryNames": ["myRepo"],
+    "sourceCommit": "44099367400737190644265170571015343790",
+    "sourceReference": "branch1",
+    "title": "example title"
+  }
+}
+```
+
+**pullRequestMergeStatusUpdated event**
+
+```
+{
+  "version": "0",
+  "id": "01234567-0123-0123-0123-012345678901",
+  "detail-type": "CodeCommit PullRequest State Change",
+  "source": "aws.codecommit",
+  "account": "123456789012",
+  "time": "2017-06-12T10:23:43Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+  ],
+  "detail": {
+    "author": "author",
+    "callerUserArn": "arn:aws:sts::123456789012:assumed-role/Admin/user",
+    "creationDate": "Mon Mar 11 14:42:31 PDT 2019",
+    "description": "example description",
+    "destinationCommit": "43767191101045477595267745869152226013",
+    "destinationReference": "master",
+    "event": "pullRequestMergeStatusUpdated",
+    "isMerged": "True",
+    "lastModifiedDate": "Mon Mar 11 14:42:31 PDT 2019",
+    "mergeOption": "FAST_FORWARD_MERGE",
+    "notificationBody": "A pull request event occurred in the following AWS CodeCommit repository: myRepo. arn:aws:sts::123456789012:assumed-role/Admin/user updated the following PullRequest 1. The pull request merge status has been updated. The status is merged. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/myRepo/pull-requests/1?region\u003dus-east-1",
+    "pullRequestId": "1",
+    "pullRequestStatus": "Closed",
+    "repositoryNames": ["myRepo"],
+    "sourceCommit": "07016964384897179397368240755267187833",
+    "sourceReference": "branch1",
+    "title": "example title"
+  }
 }
 ```
 
 ## AWS CodeDeploy Events<a name="acd_event_types"></a>
 
-The following are examples of the events for AWS CodeDeploy\. For more information, see [Monitoring Deployments with CloudWatch Events](https://docs.aws.amazon.com/codedeploy/latest/userguide/monitoring-cloudwatch-events.html) in the *AWS CodeDeploy User Guide*\.
+The following are examples of the events for CodeDeploy\. For more information, see [Monitoring Deployments with CloudWatch Events](https://docs.aws.amazon.com/codedeploy/latest/userguide/monitoring-cloudwatch-events.html) in the *AWS CodeDeploy User Guide*\.
 
 **CodeDeploy Deployment State\-change Notification**
 
@@ -210,9 +503,9 @@ There was a change in the state of an instance that belongs to a deployment grou
 }
 ```
 
-## AWS CodePipeline Events<a name="codepipeline_event_type"></a>
+## CodePipeline Events<a name="codepipeline_event_type"></a>
 
-The following are examples of events for AWS CodePipeline\.
+The following are examples of events for CodePipeline\.
 
 **Pipeline Execution State Change**
 
@@ -1249,6 +1542,10 @@ In the following example, the `typeofChange` is `CreateTable`\. Other possible v
 }
 ```
 
+## AWS Ground Station Events<a name="ground_station-event-types"></a>
+
+For information about example AWS Ground Station events, see [Automating AWS Ground Station with CloudWatch Events](https://docs.aws.amazon.com/ground-station/latest/ug/automating-events.html) in the *AWS Ground Station User Guide*\. 
+
 ## Amazon GuardDuty Events<a name="guardduty-event-types"></a>
 
 For information about example Amazon GuardDuty events, see [Monitoring Amazon GuardDuty with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug//guardduty_findings_cloudwatch.html) in the *Amazon GuardDuty User Guide*\.
@@ -2127,6 +2424,10 @@ If the value of `TransformJobStatus` is `Failed`, the event contains the `Failur
 }
 ```
 
+## AWS Security Hub Events<a name="securityhub-event-types"></a>
+
+For information about example Security Hub events, see [Monitoring AWS Security Hub with Amazon CloudWatch Events](https://docs.aws.amazon.com/securityhub/latest/userguide//securityhub-cloudwatch-events.html) in the *AWS Security Hub User Guide*\.
+
 ## AWS Server Migration Service Events<a name="server-migration-service-event-types"></a>
 
 The following are examples of the events for AWS Server Migration Service\.
@@ -2658,6 +2959,10 @@ The following are examples of the events for Amazon EC2 Systems Manager \(SSM\) 
   }
 }
 ```
+
+## AWS Step Functions Events<a name="stepfunctions_event_type"></a>
+
+For Step Functions sample events, see [Step Functions Event Examples](https://docs.aws.amazon.com/step-functions/latest/dg/cw-events.html#cw-events-events) in the *AWS Step Functions Developer Guide*\.
 
 ## Tag Change Events on AWS Resources<a name="tag-event-types"></a>
 

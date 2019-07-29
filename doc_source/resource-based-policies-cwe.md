@@ -1,13 +1,14 @@
 # Using Resource\-Based Policies for CloudWatch Events<a name="resource-based-policies-cwe"></a>
 
-When a rule is triggered in CloudWatch Events, all the targets associated with the rule are invoked\. *Invocation* means invoking the AWS Lambda functions, publishing to the Amazon SNS topics, and relaying the event to the Kinesis streams\. In order to be able to make API calls against the resources you own, CloudWatch Events needs the appropriate permissions\. For Lambda, Amazon SNS, and Amazon SQS resources, CloudWatch Events relies on resource\-based policies\. For Kinesis streams, CloudWatch Events relies on IAM roles\.
+When a rule is triggered in CloudWatch Events, all the targets associated with the rule are invoked\. *Invocation* means invoking the AWS Lambda functions, publishing to the Amazon SNS topics, and relaying the event to the Kinesis streams\. In order to be able to make API calls against the resources you own, CloudWatch Events needs the appropriate permissions\. For Lambda, Amazon SNS, Amazon SQS, and CloudWatch Logs resources, CloudWatch Events relies on resource\-based policies\. For Kinesis streams, CloudWatch Events relies on IAM roles\.
 
-You can use the following permissions to invoke the targets associated with your CloudWatch Events rules\. The procedures below use the AWS CLI to add permissions to your targets\. For information about how to install and configure the AWS CLI, see [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) in the *AWS Command Line Interface User Guide*\.
+You can use the following permissions to invoke the targets associated with your CloudWatch Events rules\. The following procedures use the AWS CLI to add permissions to your targets\. For information about how to install and configure the AWS CLI, see [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) in the *AWS Command Line Interface User Guide*\.
 
 **Topics**
 + [AWS Lambda Permissions](#lambda-permissions)
 + [Amazon SNS Permissions](#sns-permissions)
 + [Amazon SQS Permissions](#sqs-permissions)
++ [CloudWatch Logs Permissions](#cloudwatchlogs-permissions)
 
 ## AWS Lambda Permissions<a name="lambda-permissions"></a>
 
@@ -162,3 +163,34 @@ To allow a CloudWatch Events rule to invoke an Amazon SQS queue, use the `aws sq
    If the SQS queue already has a policy, you need to copy the original policy and combine it with a new statement in the set\-queue\-attributes\.json file and run the preceding command to update the policy\.
 
 For more information, see [Amazon SQS Policy Examples](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSExamples.html) in the *Amazon Simple Queue Service Developer Guide*\.
+
+## CloudWatch Logs Permissions<a name="cloudwatchlogs-permissions"></a>
+
+When CloudWatch Logs is the target of a rule, CloudWatch Events creates log streams, and CloudWatch Logs stores the text from the triggering events as log entries\. To allow CloudWatch Events to create the log stream and log the events, CloudWatch Logs must include a resource\-based policy that enables CloudWatch Events to write to CloudWatch Logs\. If you use the AWS Management Console to add CloudWatch Logs as the target of a rule, this policy is created automatically\. If you use the AWS CLI to add the target, you must create this policy if it doesn't exist\. The following example shows the necessary policy\. This example allows CloudWatch Events to write to all log groups that have names that start with `/aws/events/`\. If you use a different log group naming policy for these types of logs, adjust the policy accordingly\.
+
+```
+{
+    "Statement": [
+        {
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Condition": {
+                "ArnLike": {
+                    "AWS:SourceArn": "arn:aws:events:{{region}}:{{account}}:*"
+                }
+            },
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "events.amazonaws.com"
+            },
+            "Resource": "arn:aws:logs:{{region}}:{{account}}:log-group:/aws/events/*:*",
+            "Sid": "TrustEventsToStoreLogEvent"
+        }
+    ],
+    "Version": "2012-10-17"
+}
+```
+
+For more information, see [Controlling Access to Resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html#access_controlling-resources) in the *IAM User Guide*\.

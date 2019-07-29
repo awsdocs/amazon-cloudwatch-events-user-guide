@@ -25,7 +25,7 @@ To specify all CloudWatch Events API actions, use the \* wildcard as follows:
 "Action": "events:*"
 ```
 
-The actions you can specify in an IAM policy for use with CloudWatch Events are listed below\.
+The following table lists the actions that you can specify in an IAM policy for use with CloudWatch Events\.
 
 
 **CloudWatch Events API Operations and Required Permissions for Actions**  
@@ -33,7 +33,7 @@ The actions you can specify in an IAM policy for use with CloudWatch Events are 
 | CloudWatch Events API Operations | Required Permissions \(API Actions\) | 
 | --- | --- | 
 |  [DeleteRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DeleteRule.html)  |  `events:DeleteRule` Required to delete a rule\.  | 
-|  [DescribeEventBus](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DescribeEventBus.html)  |  `events:DescribeEventBus` Required to list AWS accounts that are allowed to write events to the current account's event bus\.  | 
+|  [DescribeEventBus](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DescribeEventBus.html)  |  `events:DescribeEventBus` Required to list accounts that are allowed to write events to the current account's event bus\.  | 
 |  [DescribeRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DescribeRule.html)  |  `events:DescribeRule` Required to list the details about a rule\.  | 
 |  [DisableRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_DisableRule.html)  |  `events:DisableRule` Required to disable a rule\.  | 
 |  [EnableRule](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_EnableRule.html)  |  `events:EnableRule` Required to enable a rule\.  | 

@@ -1,4 +1,4 @@
-# What is Amazon CloudWatch Events?<a name="WhatIsCloudWatchEvents"></a>
+# What Is Amazon CloudWatch Events?<a name="WhatIsCloudWatchEvents"></a>
 
 Amazon CloudWatch Events delivers a near real\-time stream of system events that describe changes in Amazon Web Services \(AWS\) resources\. Using simple rules that you can quickly set up, you can match events and route them to one or more target functions or streams\. CloudWatch Events becomes aware of operational changes as they occur\. CloudWatch Events responds to these operational changes and takes corrective action as necessary, by sending messages to respond to the environment, activating functions, making changes, and capturing state information\.
 
@@ -9,25 +9,26 @@ You can configure the following AWS services as targets for CloudWatch Events:
 + AWS Lambda functions
 + Streams in Amazon Kinesis Data Streams
 + Delivery streams in Amazon Kinesis Data Firehose
++ Log groups in Amazon CloudWatch Logs
 + Amazon ECS tasks
 + Systems Manager Run Command
 + Systems Manager Automation
 + AWS Batch jobs
 + Step Functions state machines
-+ Pipelines in AWS CodePipeline
-+ AWS CodeBuild projects
++ Pipelines in CodePipeline
++ CodeBuild projects
 + Amazon Inspector assessment templates
 + Amazon SNS topics
 + Amazon SQS queues
-+ Built\-in targets—`EC2 CreateSnapshot API call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`, and `EC2 TerminateInstances API call`\.
++ Built\-in targets: `EC2 CreateSnapshot API call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`, and `EC2 TerminateInstances API call`\.
 + The default event bus of another AWS account
 
 ## Concepts<a name="CloudWatchEventsComponents"></a>
 
 Before you begin using CloudWatch Events, you should understand the following concepts:
-+ **Events**—An event indicates a change in your AWS environment\. AWS resources can generate events when their state changes\. For example, Amazon EC2 generates an event when the state of an EC2 instance changes from pending to running, and Amazon EC2 Auto Scaling generates events when it launches or terminates instances\. AWS CloudTrail publishes events when you make API calls\. You can generate custom application\-level events and publish them to CloudWatch Events\. You can also set up scheduled events that are generated on a periodic basis\. For a list of services that generate events, and sample events from each service, see [CloudWatch Events Event Examples From Supported Services](EventTypes.md)\.
-+ **Targets**—A target processes events\. Targets can include Amazon EC2 instances, AWS Lambda functions, Kinesis streams, Amazon ECS tasks, Step Functions state machines, Amazon SNS topics, Amazon SQS queues, and built\-in targets\. A target receives events in JSON format\.
-+ **Rules**—A rule matches incoming events and routes them to targets for processing\. A single rule can route to multiple targets, all of which are processed in parallel\. Rules are not processed in a particular order\. This enables different parts of an organization to look for and process the events that are of interest to them\. A rule can customize the JSON sent to the target, by passing only certain parts or by overwriting it with a constant\.
++ **Events** – An event indicates a change in your AWS environment\. AWS resources can generate events when their state changes\. For example, Amazon EC2 generates an event when the state of an EC2 instance changes from pending to running, and Amazon EC2 Auto Scaling generates events when it launches or terminates instances\. AWS CloudTrail publishes events when you make API calls\. You can generate custom application\-level events and publish them to CloudWatch Events\. You can also set up scheduled events that are generated on a periodic basis\. For a list of services that generate events, and sample events from each service, see [CloudWatch Events Event Examples From Supported Services](EventTypes.md)\.
++ **Targets** – A target processes events\. Targets can include Amazon EC2 instances, AWS Lambda functions, Kinesis streams, Amazon ECS tasks, Step Functions state machines, Amazon SNS topics, Amazon SQS queues, and built\-in targets\. A target receives events in JSON format\.
++ **Rules** – A rule matches incoming events and routes them to targets for processing\. A single rule can route to multiple targets, all of which are processed in parallel\. Rules are not processed in a particular order\. This enables different parts of an organization to look for and process the events that are of interest to them\. A rule can customize the JSON sent to the target, by passing only certain parts or by overwriting it with a constant\.
 
 ## Related AWS Services<a name="related_services_cwe"></a>
 

@@ -23,7 +23,7 @@ In CloudWatch Events, the primary resource is a rule\. CloudWatch Events support
 | --- | --- | 
 |  Rule  |  `arn:aws:events:region:account:rule/rule-name`  | 
 |  All CloudWatch Events resources  |  `arn:aws:events:*`  | 
-|  All CloudWatch Events resources owned by the specified account in the specified region  |  `arn:aws:events:region:account:*`  | 
+|  All CloudWatch Events resources owned by the specified account in the specified Region  |  `arn:aws:events:region:account:*`  | 
 
 **Note**  
 Most services in AWS treat a colon \(:\) or a forward slash \(/\) as the same character in ARNs\. However, CloudWatch Events uses an exact match in event patterns and rules\. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match\.
@@ -56,10 +56,10 @@ CloudWatch Events provides a set of operations to work with the CloudWatch Event
 
 ## Understanding Resource Ownership<a name="understanding-resource-ownership-cwe"></a>
 
-The AWS account owns the resources that are created in the account, regardless of who created the resources\. Specifically, the resource owner is the AWS account of the [principal entity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the AWS account root user, an IAM user, or an IAM role\) that authenticates the resource creation request\. The following examples illustrate how this works:
-+ If you use the root user credentials of your AWS account to create a rule, your AWS account is the owner of the CloudWatch Events resource\.
-+ If you create an IAM user in your AWS account and grant permissions to create CloudWatch Events resources to that user, the user can create CloudWatch Events resources\. However, your AWS account, to which the user belongs, owns the CloudWatch Events resources\.
-+ If you create an IAM role in your AWS account with permissions to create CloudWatch Events resources, anyone who can assume the role can create CloudWatch Events resources\. Your AWS account, to which the role belongs, owns the CloudWatch Events resources\.
+The account owns the resources that are created in the account, regardless of who created the resources\. Specifically, the resource owner is the account of the [principal entity](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the account root user, an IAM user, or an IAM role\) that authenticates the resource creation request\. The following examples illustrate how this works:
++ If you use the root user credentials of your account to create a rule, your account is the owner of the CloudWatch Events resource\.
++ If you create an IAM user in your account and grant permissions to create CloudWatch Events resources to that user, the user can create CloudWatch Events resources\. However, your account, to which the user belongs, owns the CloudWatch Events resources\.
++ If you create an IAM role in your account with permissions to create CloudWatch Events resources, anyone who can assume the role can create CloudWatch Events resources\. Your account, which the role belongs to, owns the CloudWatch Events resources\.
 
 ## Managing Access to Resources<a name="managing-access-resources-cwe"></a>
 
@@ -78,7 +78,7 @@ Policies attached to an IAM identity are referred to as identity\-based policies
 
 You can attach policies to IAM identities\. For example, you can do the following: 
 + **Attach a permissions policy to a user or a group in your account** – To grant a user permissions to view rules in the CloudWatch console, you can attach a permissions policy to a user or group that the user belongs to\.
-+ **Attach a permissions policy to a role \(grant cross\-account permissions\)** – You can attach an identity\-based permissions policy to an IAM role to grant cross\-account permissions\. For example, the administrator in account A can create a role to grant cross\-account permissions to another AWS account \(for example, account B\) or an AWS service as follows:
++ **Attach a permissions policy to a role \(grant cross\-account permissions\)** – You can attach an identity\-based permissions policy to an IAM role to grant cross\-account permissions\. For example, the administrator in account A can create a role to grant cross\-account permissions to another account \(for example, account B\) or an AWS service as follows:
 
   1. Account A administrator creates an IAM role and attaches a permissions policy to the role that grants permissions on resources in account A\.
 

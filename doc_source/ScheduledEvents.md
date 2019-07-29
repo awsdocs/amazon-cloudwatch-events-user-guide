@@ -93,14 +93,18 @@ value
 A positive number\.
 
 unit  
-The unit of time\.  
+The unit of time\. Different units are required for values of 1, such as `minute`, and values over 1, such as `minutes`\.  
 Valid values: minute \| minutes \| hour \| hours \| day \| days
 
 **Limits**  
 If the value is equal to 1, then the unit must be singular\. Similarly, for values greater than 1, the unit must be plural\. For example, rate\(1 hours\) and rate\(5 hour\) are not valid, but rate\(1 hour\) and rate\(5 hours\) are valid\.
 
 **Examples**  
-The following examples show how to use rate expressions with the AWS CLI [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\. The first example triggers the rule every 5 minutes, the next triggers it once an hour, and the third example triggers it once a day\.
+The following examples show how to use rate expressions with the AWS CLI [put\-rule](https://docs.aws.amazon.com/cli/latest/reference/events/put-rule.html) command\. The first example triggers the rule every minute, the second example triggers it every 5 minutes, the next triggers it once an hour, and the third example triggers it once a day\.
+
+```
+aws events put-rule --schedule-expression "rate(1 minute)" --name MyRule2
+```
 
 ```
 aws events put-rule --schedule-expression "rate(5 minutes)" --name MyRule3

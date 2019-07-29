@@ -21,7 +21,7 @@ For information about adding and managing tags, see [Managing Tags](#tagging-add
 
 Tags consist of the `Key` and `Value` properties on a resource\. You can use the CloudWatch console, the AWS CLI, or the CloudWatch Events API to add, edit, or delete the values for these properties\. For information about working with tags, see the following:
 + [TagResource](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_TagResource.html), [UntagResource](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_UntagResource.html), and [ListTagsForResource](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_ListTagsForResource.html) in the *Amazon CloudWatch Events API Reference*
-+ [tag\-resource](url-doc-domain;cli/latest/reference/events/API_tag-resource.html), [untag\-resource](url-doc-domain;cli/latest/reference/events/API_untag-resource.html), and [list\-tags\-for\-resource](https://docs.aws.amazon.com/cli/latest/reference/events/API_ListTagsForResource.html) in the *Amazon CloudWatch CLI Reference*
++ [tag\-resource](https://docs.aws.amazon.com/cli/latest/reference/events/tag-resource.html), [untag\-resource](https://docs.aws.amazon.com/cli/latest/reference/events/untag-resource.html), and [list\-tags\-for\-resource](https://docs.aws.amazon.com/cli/latest/reference/events/list-tags-for-resource.html) in the *Amazon CloudWatch CLI Reference*
 + [Working with Tag Editor](https://docs.aws.amazon.com/ARG/latest/userguide/tag-editor.html) in the *Resource Groups User Guide*
 
 ## Tag Naming and Usage Conventions<a name="tagging-restrictions"></a>

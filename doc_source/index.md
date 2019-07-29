@@ -14,7 +14,7 @@ Amazon's trademarks and trade dress may not be used in
 
 -----
 ## Contents
-+ [What is Amazon CloudWatch Events?](WhatIsCloudWatchEvents.md)
++ [What Is Amazon CloudWatch Events?](WhatIsCloudWatchEvents.md)
 + [Setting Up Amazon CloudWatch Events](GettingSetup_cwe.md)
 + [Getting Started with Amazon CloudWatch Events](CWE_GettingStarted.md)
    + [Creating a CloudWatch Events Rule That Triggers on an Event](Create-CloudWatch-Events-Rule.md)
@@ -33,7 +33,8 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Set AWS Systems Manager Automation as a CloudWatch Events Target](SSM_Automation_as_Target.md)
    + [Tutorial: Relay Events to an Amazon Kinesis Stream Using CloudWatch Events](RelayEventsKinesisStream.md)
    + [Tutorial: Run an Amazon ECS Task When a File is Uploaded to an Amazon S3 Bucket](CloudWatch-Events-tutorial-ECS.md)
-   + [Tutorial: Schedule Automated Builds Using AWS CodeBuild](CloudWatch-Events-tutorial-codebuild.md)
+   + [Tutorial: Schedule Automated Builds Using CodeBuild](CloudWatch-Events-tutorial-codebuild.md)
+   + [Tutorial: Log State Changes of Amazon EC2 Instances](CloudWatch-Events-tutorial-CloudWatch-Logs.md)
 + [Schedule Expressions for Rules](ScheduledEvents.md)
 + [Event Patterns in CloudWatch Events](CloudWatchEventsandEventPatterns.md)
 + [CloudWatch Events Event Examples From Supported Services](EventTypes.md)
