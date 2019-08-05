@@ -79,7 +79,7 @@ aws events put-rule --schedule-expression "cron(15 10 ? * 6L 2002-2005)" --name 
 
 ## Rate Expressions<a name="RateExpressions"></a>
 
-A rate expression is first executed when you create the scheduled event rule, and then runs on its defined schedule starting at that time\.
+A rate expression is first executed when you create the scheduled event rule, and then runs on its defined schedule starting at the time the rule is created\.
 
 Rate expressions have two required fields\. Fields are separated by white space\.
 
