@@ -12,10 +12,10 @@ Events in Amazon CloudWatch Events are represented as JSON objects\. For more in
   "time": "2017-12-22T18:43:48Z",
   "region": "us-west-1",
   "resources": [
-    "arn:aws:ec2:us-west-1:123456789012:instance/ i-1234567890abcdef0"
+    "arn:aws:ec2:us-west-1:123456789012:instance/i-1234567890abcdef0"
   ],
   "detail": {
-    "instance-id": " i-1234567890abcdef0",
+    "instance-id": "i-1234567890abcdef0",
     "state": "terminated"
   }
 }
