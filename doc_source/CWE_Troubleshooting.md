@@ -19,6 +19,8 @@ You can use the steps in this section to troubleshoot CloudWatch Events\.
 + [My Amazon SNS topic still has permissions for CloudWatch Events even after I deleted the rule associated with the Amazon SNS topic](#SNSPermissionsPersist)
 + [Which IAM condition keys can I use with CloudWatch Events](#SupportedAccessPolicies)
 + [How can I tell when CloudWatch Events rules are broken](#CreateAlarmBrokenEventRules)
++ [My ecs task was not invoked](#ECSTaskNotInvoked)
+
 
 ## My rule was triggered but my Lambda function was not invoked<a name="LAMfunctionNotInvoked"></a>
 
@@ -272,3 +274,14 @@ You can use the following alarm to notify you when your CloudWatch Events rules 
 1. For **Email list**, type a comma\-separated list of email addresses to be notified when the alarm changes to the **ALARM** state\.
 
 1. Choose **Create Alarm**\.
+
+## My ecs task was not invoked<a name="ECSTaskNotInvoked"></a>
+
+Look in **CloudTrail** -> **Event History**.  
+Filterfor **EventName = RunTask**. 
+Find the event by **Event Time**. 
+**Source IP address** should be **events.amazonaws.com**. 
+Click **View Event**.  
+Look for the following fields which should contain your error:
+- errorCode
+- errorMessage
