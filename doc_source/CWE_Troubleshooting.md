@@ -145,7 +145,6 @@ An infinite loop can quickly cause higher than expected charges\. We recommend t
 ## My events are not delivered to the target Amazon SQS queue<a name="SQSEncrypted"></a>
 
 The Amazon SQS queue may be encrypted\. If you create a rule with an encrypted Amazon SQS queue as a target, you must have the following section included in your KMS key policy for the event to be successfully delivered to the encrypted queue\.
-
 ```
 {
                 "Sid": "Allow CWE to use the key",
@@ -160,6 +159,10 @@ The Amazon SQS queue may be encrypted\. If you create a rule with an encrypted A
                 "Resource": "*"
 }
 ```
+## SQS FIFO queue
+To let CloudWatch Events send messages to an SQS FIFO queue, you must enabled content-based deduplication.
+
+
 
 ## My rule is being triggered but I don't see any messages published into my Amazon SNS topic<a name="NoMessagesPublishedSNS"></a>
 
