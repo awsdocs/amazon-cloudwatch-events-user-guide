@@ -1616,7 +1616,8 @@ The AWS service affected by the event\. For example, `EC2`, `S3`, `REDSHIFT`, or
     "eventDescription": [{
       "language": "en_US",
       "latestDescription": "A description of the event will be provided here"
-  }
+  }]
+ }
 }
 ```
 
@@ -1650,6 +1651,8 @@ The AWS service affected by the event\. For example, `EC2`, `S3`, `REDSHIFT`, or
         "stage": "prod",
         "app": "my-app"
   }
+}]
+}
 }
 ```
 
