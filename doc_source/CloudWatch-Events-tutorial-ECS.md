@@ -6,6 +6,8 @@ This tutorial assumes that you have already created the task definition in Amazo
 
 **To run an Amazon ECS task whenever a file is uploaded to an S3 bucket using the PUT operation**
 
+a) Create a CloudWatch Event Rule with ECS Task as a Target
+
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
 1. In the navigation pane, choose **Events**, **Create rule**\.
@@ -55,3 +57,7 @@ This tutorial assumes that you have already created the task definition in Amazo
 1. For **Rule definition**, type a name and description for the rule\.
 
 1. Choose **Create rule**\.
+
+b) Enable CloudTrail event logging for S3 buckets for S3:PutObjects API call
+
+1) 
