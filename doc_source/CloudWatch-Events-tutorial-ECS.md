@@ -4,7 +4,7 @@ You can use CloudWatch Events to run Amazon ECS tasks when certain AWS events oc
 
 This tutorial assumes that you have already created the task definition in Amazon ECS\.
 
-### To run an Amazon ECS task whenever a file is uploaded to an S3 bucket using the PUT operation**
+### To run an Amazon ECS task whenever a file is uploaded to an S3 bucket using the PUT operation
 
 **A) Create a CloudWatch Event Rule with ECS Task as a Target**
 
@@ -60,7 +60,7 @@ This tutorial assumes that you have already created the task definition in Amazo
 
 **B) Enable CloudTrail event logging for S3 buckets for `S3:PutObjects` API call**
 
-You can use the Amazon S3 console to configure an AWS CloudTrail trail to log data events for objects in an S3 bucket. CloudTrail supports logging Amazon S3 object-level API operations such as GetObject, DeleteObject, and PutObject. These events are called data events.
+You can use the Amazon S3 console to configure an AWS CloudTrail trail to log data events for objects in an S3 bucket. CloudTrail supports logging Amazon S3 object-level API operations such as `GetObject`, `DeleteObject`, and `PutObject`. These events are called data events.
 
 By default, CloudTrail trails don't log data events, but you can configure trails to log data events for S3 buckets that you specify, or to log data events for all the Amazon S3 buckets in your AWS account.
 
