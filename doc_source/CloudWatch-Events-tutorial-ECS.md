@@ -4,9 +4,9 @@ You can use CloudWatch Events to run Amazon ECS tasks when certain AWS events oc
 
 This tutorial assumes that you have already created the task definition in Amazon ECS\.
 
-**To run an Amazon ECS task whenever a file is uploaded to an S3 bucket using the PUT operation**
+### To run an Amazon ECS task whenever a file is uploaded to an S3 bucket using the PUT operation**
 
-a) Create a CloudWatch Event Rule with ECS Task as a Target
+**A) Create a CloudWatch Event Rule with ECS Task as a Target**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
@@ -58,6 +58,30 @@ a) Create a CloudWatch Event Rule with ECS Task as a Target
 
 1. Choose **Create rule**\.
 
-b) Enable CloudTrail event logging for S3 buckets for S3:PutObjects API call
+**B) Enable CloudTrail event logging for S3 buckets for `S3:PutObjects` API call**
 
-1) 
+You can use the Amazon S3 console to configure an AWS CloudTrail trail to log data events for objects in an S3 bucket. CloudTrail supports logging Amazon S3 object-level API operations such as GetObject, DeleteObject, and PutObject. These events are called data events.
+
+By default, CloudTrail trails don't log data events, but you can configure trails to log data events for S3 buckets that you specify, or to log data events for all the Amazon S3 buckets in your AWS account.
+
+To configure a trail to log data events for an S3 bucket, you can use either the AWS CloudTrail console or the Amazon S3 console. If you are configuring a trail to log data events for all the Amazon S3 buckets in your AWS account, it's easier to use the CloudTrail console.
+
+**The following procedure shows how to use the Amazon S3 console to configure a CloudTrail trail to log data events for an S3 bucket.**
+
+> To enable CloudTrail data events logging for objects in an S3 bucket
+
+1. Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
+
+2. In the **Buckets** list, choose the name of the bucket.
+
+3. Choose **Properties**.
+
+4. Under **AWS CloudTrail data events**, choose **Configure in CloudTrail**.
+You can create a new CloudTrail trail or reuse an existing trail and configure Amazon S3 data events to be logged in your trail. For information about how to create trails in the CloudTrail console, see [Creating and updating a trail with the console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events) in the AWS CloudTrail User Guide. For information about how to configure Amazon S3 data event logging in the CloudTrail console, see [Logging data events for Amazon S3 Objects](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events-examples) in the AWS CloudTrail User Guide.
+
+**Note:**
+If you use the CloudTrail console or the Amazon S3 console to configure a trail to log data events for an S3 bucket, the Amazon S3 console shows that object-level logging is enabled for the bucket.
+
+**To disable CloudTrail data events logging for objects in an S3 bucket**
+
+1. To disable object-level logging for the bucket, you must open the CloudTrail console and remove the bucket name from the trail's Data events.
