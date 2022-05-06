@@ -68,7 +68,7 @@ To configure a trail to log data events for an S3 bucket, you can use either the
 
 **The following procedure shows how to use the Amazon S3 console to configure a CloudTrail trail to log data events for an S3 bucket.**
 
-> To enable CloudTrail data events logging for objects in an S3 bucket
+**To enable CloudTrail data events logging for objects in an S3 bucket**
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.
 
@@ -77,10 +77,58 @@ To configure a trail to log data events for an S3 bucket, you can use either the
 3. Choose **Properties**.
 
 4. Under **AWS CloudTrail data events**, choose **Configure in CloudTrail**.
-You can create a new CloudTrail trail or reuse an existing trail and configure Amazon S3 data events to be logged in your trail. For information about how to create trails in the CloudTrail console, see [Creating and updating a trail with the console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events) in the AWS CloudTrail User Guide. For information about how to configure Amazon S3 data event logging in the CloudTrail console, see [Logging data events for Amazon S3 Objects](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events-examples) in the AWS CloudTrail User Guide.
+You can create a new CloudTrail trail or reuse an existing trail and configure Amazon S3 data events to be logged in your trail. 
+
+5. This will open **Trails** page in AWS CloudTrail console and then choose the trail name\.
+*****Note**: While you can edit an existing trail to add logging data events, as a best practice, consider creating a separate trail specifically for logging data events\.***
+
+6. To create a new CloudTrail trail with the AWS Management Console follow below steps:
+   1. Choose **Create trail**\.
+
+   2. On the **Create Trail** page, for **Trail name**, type a name for your trail\. For more information, see [CloudTrail trail naming requirements](cloudtrail-trail-naming-requirements.md)\.
+
+   3. For **Storage location**, choose **Create new S3 bucket** to create a bucket\. When you create a bucket, CloudTrail creates and applies the required bucket policies\.
+**Note**  If you chose **Use existing S3 bucket**, specify a bucket in **Trail log bucket name**, or choose **Browse** to choose a bucket\. The bucket policy must grant CloudTrail permission to write to it\. For information about manually editing the bucket policy, see [Amazon S3 bucket policy for CloudTrail](create-s3-bucket-policy-for-cloudtrail.md)\.
+
+   To make it easier to find your logs, create a new folder \(also known as a *prefix*\) in an existing bucket to store your CloudTrail logs\. Enter the prefix in **Prefix**\.
+
+   4. For **Log file SSE\-KMS encryption**, choose **Disabled** for this lab, however if you want to encrypt your log files with SSE\-KMS instead of SSE\-S3\. Choose **Enabled**\. For more information about this encryption type, see [Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
+
+   5. In **Additional settings**, configure the following\.
+
+      1. For **Log file validation**, choose **Enabled** to have log digests delivered to your S3 bucket\. You can use the digest files to verify that your log files did not change after CloudTrail delivered them\. For more information, see [Validating CloudTrail log file integrity](cloudtrail-log-file-validation-intro.md)\.
+
+      2. Clink **Next** and follow below Step 8.
+
+8. If you already have a **Trail** Click on it and Choose **Edit** under **Data events** 
+OR 
+If are creating a new trail using above steps 6, then choose the For **Data events**, choose **Edit**\.
+
+9. For Amazon S3 buckets:
+
+   1. For **Data event source**, choose **S3**\.
+
+   2. You can choose to log **All current and future S3 buckets**, or you can specify individual buckets or functions\. By default, data events are logged for all current and future S3 buckets\.
+**Note**  
+Keeping the default **All current and future S3 buckets** option enables data event logging for all buckets currently in your AWS account and any buckets you create after you finish creating the trail\. It also enables logging of data event activity performed by any user or role in your AWS account, even if that activity is performed on a bucket that belongs to another AWS account\.  
+If you are creating a trail for a single Region \(done by using the AWS CLI\), selecting the **Select all S3 buckets in your account** option enables data event logging for all buckets in the same Region as your trail and any buckets you create later in that Region\. It will not log data events for Amazon S3 buckets in other Regions in your AWS account\.
+
+   3. If you leave the default, **All current and future S3 buckets**, choose to log **Read** events, **Write** events, or both\.
+
+   4. To select individual buckets, empty the **Read** and **Write** check boxes for **All current and future S3 buckets**\. In **Individual bucket selection**, browse for a bucket on which to log data events\. To find specific buckets, type a bucket prefix for the bucket you want\. You can select multiple buckets in this window\. Choose **Add bucket** to log data events for more buckets\. Choose to log **Read** events, such as `GetObject`, **Write** events, such as `PutObject`, or both\.
+
+      This setting takes precedence over individual settings you configure for individual buckets\. For example, if you specify logging **Read** events for all S3 buckets, and then choose to add a specific bucket for data event logging, **Read** is already selected for the bucket you added\. You cannot clear the selection\. You can only configure the option for **Write**\.
+
+      To remove a bucket from logging, choose **X**\.
+
+   5. To add another data type on which to log data events, choose **Add data event type**\.
+
+
+* For information about how to create and update trails in the CloudTrail console, see [Creating a trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html) [Updating a trail with the console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events) in the AWS CloudTrail User Guide. 
+* For information about how to configure Amazon S3 data event logging in the CloudTrail console, see [Logging data events for Amazon S3 Objects](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events-examples) in the AWS CloudTrail User Guide.
 
 **Note:**
-If you use the CloudTrail console or the Amazon S3 console to configure a trail to log data events for an S3 bucket, the Amazon S3 console shows that object-level logging is enabled for the bucket.
+If object-level logging is successfully enabled via CloudTrail console or the Amazon S3 console to configure a trail to log data events for an S3 bucket, the Amazon S3 console shows that object-level logging is enabled for the bucket.
 
 **To disable CloudTrail data events logging for objects in an S3 bucket**
 
