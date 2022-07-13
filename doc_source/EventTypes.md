@@ -1492,6 +1492,8 @@ The following is the format for AWS Glue events\.
 
 **AWS Glue Data Catalog Table State Change**
 
+In the following example, the `typeofChange` is `BatchCreatePartition`\. Other possible values for this field are `UpdateTable`, `CreatePartition`, `DeletePartition`, and `BatchDeletePartition`\.
+
 ```
 {
     "version": "0",
@@ -1518,7 +1520,7 @@ The following is the format for AWS Glue events\.
 
 **AWS Glue Data Catalog Database State Change**
 
-In the following example, the `typeofChange` is `CreateTable`\. Other possible values for this field are `CreateDatabase` and `UpdateTable`\.
+In the following example, the `typeofChange` is `CreateTable`\. Other possible values for this field are `CreateDatabase`, `DeleteDatabase`, `DeleteTable`, and `BatchDeleteTable`\.
 
 ```
 {
